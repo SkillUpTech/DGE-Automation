@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="DGE-Automation Suite">
+    <test name="DGE-Automation Test">
+        <classes>
+            <!-- Add your test classes here -->
+            <class name="com.skillup.dge.AppTest"/>
+        </classes>
+    </test>
+</suite>
