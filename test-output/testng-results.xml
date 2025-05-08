@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-05-08T22:02:55 IST" name="Testing Google Apps" finished-at="2025-05-08T22:28:50 IST" duration-ms="1554204">
+    <groups>
+    </groups>
+    <test started-at="2025-05-08T22:02:55 IST" name="Regression" finished-at="2025-05-08T22:28:50 IST" duration-ms="1554204">
+      <class name="com.skillup.dge.testPages.RegressionTesting">
+        <test-method is-config="true" signature="setup(java.lang.String,java.lang.String)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-08T22:02:55 IST" name="setup" finished-at="2025-05-08T22:03:00 IST" duration-ms="4411" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[stagecourses]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-08T22:03:00 IST" name="startTesting" finished-at="2025-05-08T22:28:50 IST" duration-ms="1549746" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startTesting -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-08T22:28:50 IST" name="afterMethod" finished-at="2025-05-08T22:28:50 IST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=startTesting status=SUCCESS method=RegressionTesting.startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- com.skillup.dge.testPages.RegressionTesting -->
+    </test> <!-- Regression -->
+  </suite> <!-- Testing Google Apps -->
+</testng-results>
