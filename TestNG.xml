@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="DGE-Automation Suite">
-    <test name="DGE-Automation Test">
-        <classes>
-            <!-- Add your test classes here -->
-            <class name="com.skillup.dge.AppTest"/>
-        </classes>
-    </test>
-</suite>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Testing Google Apps">
+    <test name="Regression">
+		<parameter name = "browser" value = "Chrome"/>
+		<parameter name = "env" value = "stagecourses"/>
+	<classes>
+			<class name="com.skillup.dge.testPages.RegressionTesting"/>
+		</classes>
+     </test> <!-- Test -->
+</suite> <!-- Suite -->
