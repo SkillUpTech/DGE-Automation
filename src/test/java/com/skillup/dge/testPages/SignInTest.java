@@ -7,11 +7,14 @@ import java.util.concurrent.Callable;
 
 import org.openqa.selenium.WebDriver;
 
+import com.skillup.dge.webPages.SignInPage;
+
 public class SignInTest implements Callable<String>
 {
 	ArrayList<ArrayList<String>> sheetData = null;
 	WebDriver driver;
 	String sheetStatus = "Pass";
+	SignInPage signInPage;
 
 	public SignInTest(WebDriver driver, ArrayList<ArrayList<String>> sheetData)
 	{
@@ -20,9 +23,62 @@ public class SignInTest implements Callable<String>
 	}
 
 	@Override
-	public String call() throws Exception {
+	public String call() throws Exception
+	{
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("DGE HomePage validation Process started");
+		this.signInPage = new SignInPage(driver);
+		try
+		{
+			for (int i = 0; i < this.sheetData.size(); i++)
+			{
+				ArrayList<String> row = this.sheetData.get(i);
+				String firstColumn = row.get(0);
+
+				switch (firstColumn) 
+				{
+				
+				  case "TC_P_01": TC_P_01(row); break; 
+				 
+			 	case "TC_N_01":
+			 		TC_N_01(row);
+			        break;
+			 	case "TC_N_02":
+			 		TC_N_02(row);
+			        break;
+			 	case "TC_N_03":
+			 		TC_N_03(row);
+			        break;
+			 	case "TC_N_04":
+			 		TC_N_04(row);
+			        break;
+			 	case "TC_N_05":
+			 		TC_N_05(row);
+			        break;
+			 	case "TC_N_06":
+			 		TC_N_06(row);
+			        break;
+			 	case "TC_N_07":
+			 		TC_N_07(row);
+			        break;
+			 	case "TC_N_08":
+			 		TC_N_08(row);
+			        break;
+			 	case "TC_N_09":
+			 		TC_N_09(row);
+			        break;
+				}
+			}
+		 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			sheetStatus = "Fail"; // Set status to Fail if there are errors
+		} finally {
+			System.out.println("DGE HomePage validation Process completed");
+		}
+		return sheetStatus;
 	}
 	
 	public void updateExcelData(ArrayList<String> status, int rowIndex)
@@ -33,7 +89,7 @@ public class SignInTest implements Callable<String>
 				sheetStatus = "Fail"; // Set status to Fail if there are errors
 				Map<String, ArrayList<ArrayList<String>>> excelData = com.skillup.dge.testPages.RegressionTesting.EXCEL_DATA_AS_SHEEET_NAME_AND_ROWS_MAP;
 
-				List<ArrayList<String>> sheetData = excelData.get("card");
+				List<ArrayList<String>> sheetData = excelData.get("SignIn");
 
 				while (sheetData.size() <= rowIndex) {
 					sheetData.add(new ArrayList<>()); // Add new rows if missing
@@ -56,7 +112,7 @@ public class SignInTest implements Callable<String>
 						columnIndex = 4;
 					if (issue.contains("password"))
 						columnIndex = 5;
-					if (issue.contains("Issue"))
+					if (issue.contains("Error"))
 						columnIndex = 6;
 					while (rowData.size() <= columnIndex)
 					{
@@ -68,6 +124,106 @@ public class SignInTest implements Callable<String>
 					rowData.set(columnIndex, rowData.get(columnIndex) + "; " + issue + " - failed");
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_P_01(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_P_01(data);
+			updateExcelData(status, 2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_01(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_01(data);
+			updateExcelData(status, 4);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_02(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_02(data);
+			updateExcelData(status, 5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_03(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_03(data);
+			updateExcelData(status, 6);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_04(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_04(data);
+			updateExcelData(status, 7);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_05(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_05(data);
+			updateExcelData(status, 8);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_06(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_06(data);
+			updateExcelData(status, 9);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_07(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_07(data);
+			updateExcelData(status, 10);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_08(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_08(data);
+			updateExcelData(status, 11);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void TC_N_09(ArrayList<String> data)
+	{
+		try {
+
+			ArrayList<String> status = signInPage.checkTC_N_09(data);
+			updateExcelData(status, 12);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

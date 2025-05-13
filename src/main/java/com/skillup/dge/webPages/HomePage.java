@@ -50,6 +50,7 @@ public class HomePage
 		{
 			driver.switchTo().newWindow(WindowType.TAB); // Open a new tab)
 			driver.get(url); // Navigate to the URL
+			System.out.println("home page url lanuched");
 		}
 		catch (Exception e)
         {
@@ -68,10 +69,7 @@ public class HomePage
 			status.add(this.clickWebElement(locator));
 			 driver.close();
 	         driver.switchTo().window(BaseWindow);
-			if (!status.contains("Fail"))
-			{
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-			} 
+	         System.out.println("Skillup Logo verified");
 		}
 		catch (Exception e)
         {
@@ -92,6 +90,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				 System.out.println("Discover verified");
 			} 
 		}
 		catch (Exception e)
@@ -113,6 +112,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("Register verified");
 			} 
 		}
 		catch (Exception e)
@@ -134,6 +134,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("SignIn verified");
 			} 
 		}
 		catch (Exception e)
@@ -187,6 +188,7 @@ public class HomePage
 			{
 				status.add("Fail");
 			}
+			System.out.println("search filed Text verified");
 		}
 		catch (Exception e)
         {
@@ -219,11 +221,7 @@ public class HomePage
 			{
 				status.add("Fail");
 			}
-			if (!status.contains("Fail"))
-			{
-				driver.navigate().back();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-			} 
+			System.out.println("logo on footer verified");
 		}
 		catch (Exception e)
         {
@@ -244,6 +242,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("About link verified");
 			} 
 		}
 		catch (Exception e)
@@ -265,6 +264,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("blog link verified");
 			} 
 		}
 		catch (Exception e)
@@ -286,6 +286,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("Donate link verified");
 			} 
 		}
 		catch (Exception e)
@@ -307,6 +308,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("TOS Link verified");
 			} 
 		}
 		catch (Exception e)
@@ -328,6 +330,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("Privacy Policy verified");
 			} 
 		}
 		catch (Exception e)
@@ -349,6 +352,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("Help Link verified");
 			} 
 		}
 		catch (Exception e)
@@ -370,6 +374,7 @@ public class HomePage
 			{
 				driver.navigate().back();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				System.out.println("Contact Link verified");
 			} 
 		}
 		catch (Exception e)
