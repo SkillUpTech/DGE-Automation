@@ -79,6 +79,82 @@ public class HomePageTest implements Callable<String>
 			 	case "CheckContactUsLinkFromHome":
 			 		CheckContactUsLinkFromHome();
 			        break;
+			 	case "checkRegisterTab":
+			 		checkRegisterTab();
+			        break;
+			 	case "checkGoogleButtonFromRegisterPage":
+			 		checkGoogleButtonFromRegisterPage();
+			        break;
+			 	case "checkSignTab":
+			 		checkSignTab();
+			        break;
+			 	case "checkForgotPasswordLink":
+			 		checkForgotPasswordLink();
+			        break;
+			 	case "checkGoogleButtonFromSignInPage":
+			 		checkGoogleButtonFromSignInPage();
+			        break;
+			 	case "checkSignInProcess":
+			 		checkSignInProcess();
+			        break;
+			 	case "checkDashboardURL":
+			 		checkDashboardURL();
+			        break;
+			 	case "checkUsernameFromDashboard":
+			 		checkUsernameFromDashboard();
+			        break;
+			 	case "CheckFindCourseLink":
+			 		CheckFindCourseLink();
+			        break;
+			 	case "CheckBackwardNavigationFromCoursesPage":
+			 		CheckBackwardNavigationFromCoursesPage();
+			        break;
+			 	case "CheckExploreCourseButton":
+			 		CheckExploreCourseButton();
+			        break;
+			 	case "CheckSkillupLogoFromDashboard":
+			 		CheckSkillupLogoFromDashboard();
+			        break;
+			 	case "checkExploreCoursePageURL":
+			 		checkExploreCoursePageURL();
+			        break;
+			 	case "CheckSkillupLogoFromExplore":
+			 		CheckSkillupLogoFromExplore();
+			        break;
+			 	case "CheckValidCourseToSearch":
+			 		CheckValidCourseToSearch();
+			        break;
+			 	case "CheckInValidCourseToSearch":
+			 		CheckInValidCourseToSearch();
+			        break;
+			 	case "CheckEmptyFieldToSearch":
+			 		CheckEmptyFieldToSearch();
+			        break;
+			 	case "CheckSkillupLink":
+			 		CheckSkillupLink();
+			        break;
+			 	case "CheckAboutUsLink":
+			 		CheckAboutUsLink();
+			        break;
+			 	case "CheckBlogLink":
+			 		CheckBlogLink();
+			        break;
+			 	case "CheckDonateLink":
+			 		CheckDonateLink();
+			        break;
+			 	case "CheckTOSLink":
+			 		CheckTOSLink();
+			        break;
+			 	case "CheckPrivacyPolicyLink":
+			 		CheckPrivacyPolicyLink();
+			        break;
+			 	case "CheckHelpLink":
+			 		CheckHelpLink();
+			        break;
+			 	case "CheckContactUsLink":
+			 		CheckContactUsLink();
+			        break;
+			       
 				}
 			}
 		 
@@ -277,5 +353,268 @@ public class HomePageTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
+	
+	public void checkRegisterTab()
+	{
+		try {
 
+			ArrayList<String> status = homePage.checkRegisterTab();
+			updateExcelData(status, 17);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkGoogleButtonFromRegisterPage() {
+		try {
+
+			ArrayList<String> status = homePage.checkGoogleButtonFromRegisterPage();
+			updateExcelData(status, 18);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkSignTab() {
+		try {
+
+			ArrayList<String> status = homePage.checkSignTab();
+			updateExcelData(status, 20);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkForgotPasswordLink() {
+		try {
+
+			ArrayList<String> status = homePage.checkForgotPasswordLink();
+			updateExcelData(status, 21);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void checkGoogleButtonFromSignInPage() {
+		try {
+
+			ArrayList<String> status = homePage.checkGoogleButtonFromSignInPage();
+			updateExcelData(status, 22);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkSignInProcess() {
+		try {
+
+			ArrayList<String> status = homePage.checkSignInProcess();
+			updateExcelData(status, 23);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkDashboardURL()
+	{
+		try {
+
+			ArrayList<String> status = homePage.checkDashboardURL();
+			updateExcelData(status, 25);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkUsernameFromDashboard()
+	{
+		try {
+
+			ArrayList<String> status = homePage.checkUsernameFromDashboard();
+			updateExcelData(status, 26);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckFindCourseLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckFindCourseLink();
+			updateExcelData(status, 27);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckBackwardNavigationFromCoursesPage()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckBackwardNavigationFromCoursesPage();
+			updateExcelData(status, 28);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckExploreCourseButton()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckExploreCourseButton();
+			updateExcelData(status, 29);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckSkillupLogoFromDashboard()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckSkillupLogoFromDashboard();
+			updateExcelData(status, 30);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckColorModeFromDashboard()
+	{
+
+		try {
+
+			ArrayList<String> status = homePage.CheckColorModeFromDashboard();
+			updateExcelData(status, 31);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkExploreCoursePageURL()
+	{
+
+		try {
+
+			ArrayList<String> status = homePage.checkExploreCoursePageURL();
+			updateExcelData(status, 33);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckSkillupLogoFromExplore()
+	{
+
+		try {
+
+			ArrayList<String> status = homePage.CheckSkillupLogoFromExplore();
+			updateExcelData(status, 34);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckValidCourseToSearch()
+	{
+
+		try {
+
+			ArrayList<String> status = homePage.CheckValidCourseToSearch();
+			updateExcelData(status, 35);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckInValidCourseToSearch()
+	{
+
+		try {
+
+			ArrayList<String> status = homePage.CheckInValidCourseToSearch();
+			updateExcelData(status, 36);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckEmptyFieldToSearch()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckEmptyFieldToSearch();
+			updateExcelData(status, 37);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckSkillupLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckSkillupLink();
+			updateExcelData(status, 38);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckAboutUsLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckAboutUsLink();
+			updateExcelData(status, 39);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckBlogLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckBlogLink();
+			updateExcelData(status, 40);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckDonateLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckDonateLink();
+			updateExcelData(status, 41);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckTOSLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckTOSLink();
+			updateExcelData(status, 42);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckPrivacyPolicyLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckPrivacyPolicyLink();
+			updateExcelData(status, 43);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckHelpLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckHelpLink();
+			updateExcelData(status, 44);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void CheckContactUsLink()
+	{
+		try {
+
+			ArrayList<String> status = homePage.CheckContactUsLink();
+			updateExcelData(status, 45);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

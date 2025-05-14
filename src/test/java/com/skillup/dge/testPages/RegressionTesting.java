@@ -164,9 +164,6 @@ public class RegressionTesting
 						case "SignIn":
 							taskMap.put(sheetName, new SignInTest(driver, sheetData));
 							break;
-						case "SearchProcess":
-							taskMap.put(sheetName, new HomePageTest(driver, sheetData));
-							break;
 						case "ForgetPwd":
 							taskMap.put(sheetName, new ForgetPasswordTest(driver, sheetData));
 							break;
