@@ -37,7 +37,7 @@ public class ForgetPasswordPage
 					js.executeScript("arguments[0].click();", signInButton);
 				}
 			}
-			registerPage.FocusWindow("login");
+			status.add(registerPage.FocusWindow("login"));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath("//a[@id='forgot-password']")).size()>0)
 			{
@@ -48,7 +48,7 @@ public class ForgetPasswordPage
 					js.executeScript("arguments[0].click();", forgetPasswordButton);
 				}
 			}
-			registerPage.FocusWindow("reset");
+			status.add(registerPage.FocusWindow("reset"));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath("//input[@id='email']")).size()>0)
 			{
@@ -115,7 +115,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -139,7 +139,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -163,7 +163,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -185,7 +185,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -207,7 +207,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -229,7 +229,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -251,7 +251,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -273,7 +273,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{
@@ -295,7 +295,7 @@ public class ForgetPasswordPage
 			status.addAll(this.forgetPasswordProcess(data));
 			if(!status.contains("Error")||status.contains("email"))
 			{
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 			else
 			{

@@ -18,9 +18,10 @@ public class RegisterPage
 	{
 		this.driver = driver;
 	}
-	public void FocusWindow(String windowName)
+	public String FocusWindow(String windowName)
 	{
-		
+		boolean checkWindow = false;
+		String status = "";
 		Set<String> windowHandles = driver.getWindowHandles();
 		for (String window : windowHandles) 
 		{
@@ -30,8 +31,14 @@ public class RegisterPage
 				driver.switchTo().window(window);
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 				System.out.println("Register page is displayed successfully");
+				checkWindow = true;
 			}
 		}
+		if(checkWindow == false)
+		{
+			status = "Fail";
+		}
+		return status;
 	}
 	public ArrayList<String> checkErrorMessage()
 	{
@@ -96,7 +103,7 @@ public class RegisterPage
 				{
 					js.executeScript("arguments[0].click();", registerButton);
 					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-					this.FocusWindow("register");
+					status.add(this.FocusWindow("register"));
 					System.out.println("Register page is displayed successfully");
 					
 					WebElement fullname = driver.findElement(By.xpath(fullnameLocator));
@@ -152,7 +159,7 @@ public class RegisterPage
 						else
 						{
 							System.out.println("Error message is not displayed");
-							this.FocusWindow("learner-dashboard");
+							status.add(this.FocusWindow("learner-dashboard"));
 							System.out.println("Successfully registered and logged in to the dashboard page");
 						}
 					} 
@@ -194,7 +201,7 @@ public class RegisterPage
 					{
 						System.out.println("Log out button is displayed");
 						js.executeScript("arguments[0].click();", logOut);
-						this.FocusWindow("logout");
+						status.add(this.FocusWindow("logout"));
 						System.out.println("Successfully logged out");
 					}
 					else
@@ -227,7 +234,7 @@ public class RegisterPage
 				if(homeLink.isDisplayed())
 				{
 					js.executeScript("arguments[0].click();", homeLink);
-					this.FocusWindow("stagecourses.skillup.online");
+					status.add(this.FocusWindow("stagecourses.skillup.online"));
 					System.out.println("Home page is displayed successfully");
 					
 				}

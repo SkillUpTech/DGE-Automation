@@ -78,7 +78,7 @@ public class SignInPage
 					js.executeScript("arguments[0].click();", signInButton);
 				}
 			}
-			registerPage.FocusWindow("login");
+			result.add(registerPage.FocusWindow("login"));
 			WebElement userNameField = driver.findElement(By.xpath(unameLocator));
 			js.executeScript("arguments[0].scrollIntoView(true);", userNameField);
 			if (userNameField.isDisplayed()) 
@@ -121,7 +121,7 @@ public class SignInPage
 				else
 				{
 					System.out.println("Error message is not displayed");
-					registerPage.FocusWindow("learner-dashboard");
+					result.add(registerPage.FocusWindow("learner-dashboard"));
 					System.out.println("Successfully registered and logged in to the dashboard page");
 				}
 			}
@@ -273,7 +273,7 @@ public class SignInPage
 				System.out.println("Error message is not displayed for invalid credentials");
 				status.addAll(registerPage.logOut());
 				status.addAll(registerPage.NavigateToHomePage());
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -298,7 +298,7 @@ public class SignInPage
 				System.out.println("Error message is not displayed for invalid credentials");
 				status.addAll(registerPage.logOut());
 				status.addAll(registerPage.NavigateToHomePage());
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -323,7 +323,7 @@ public class SignInPage
 				System.out.println("Error message is not displayed for invalid credentials");
 				status.addAll(registerPage.logOut());
 				status.addAll(registerPage.NavigateToHomePage());
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -348,7 +348,7 @@ public class SignInPage
 				System.out.println("Error message is not displayed for invalid credentials");
 				status.addAll(registerPage.logOut());
 				status.addAll(registerPage.NavigateToHomePage());
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -373,7 +373,7 @@ public class SignInPage
 				System.out.println("Error message is not displayed for invalid credentials");
 				status.addAll(registerPage.logOut());
 				status.addAll(registerPage.NavigateToHomePage());
-				registerPage.FocusWindow("https://stagecourses.skillup.online/");
+				status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

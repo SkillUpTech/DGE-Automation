@@ -14,10 +14,21 @@ public class HomePage
 {
 	WebDriver driver;
 	String BaseWindow = "";
-	
+	String RegisterButtonlocator = "";
+	String SignInButtonLocator = "";
+	String googleButtonLocator ="";
+	String dropDownLocator = "";
+	String signOutLocator = "";
+	String usernameFromDashboardLocator = "";
+	String homePageLink = "";
+	String exploreButtonLocator = "";
+	RegisterPage registerPage;
+	SignInPage signInPage;
 	public HomePage(WebDriver driver)
 	{
 		this.driver = driver;
+		this.registerPage = new RegisterPage(driver);
+		this.signInPage = new SignInPage(driver);
 	}
 	
 	public String clickWebElement(String locator)
@@ -104,10 +115,10 @@ public class HomePage
 	public ArrayList<String> CheckRegisterButton()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String locator = "//div[@class='mobile-nav-item hidden-mobile nav-item']//a[@class='register-btn btn'][normalize-space()='Register for free']";
+		RegisterButtonlocator = "//div[@class='mobile-nav-item hidden-mobile nav-item']//a[@class='register-btn btn'][normalize-space()='Register for free']";
 		try
 		{
-			status.add(this.clickWebElement(locator));
+			status.add(this.clickWebElement(RegisterButtonlocator));
 			if (!status.contains("Fail"))
 			{
 				driver.navigate().back();
@@ -126,10 +137,10 @@ public class HomePage
 	public ArrayList<String> CheckSignInButton()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String locator = "//div[@class='mobile-nav-item hidden-mobile nav-item']//a[@class='sign-in-btn btn'][normalize-space()='Sign in']";
+		SignInButtonLocator = "//div[@class='mobile-nav-item hidden-mobile nav-item']//a[@class='sign-in-btn btn'][normalize-space()='Sign in']";
 		try
 		{
-			status.add(this.clickWebElement(locator));
+			status.add(this.clickWebElement(SignInButtonLocator));
 			if (!status.contains("Fail"))
 			{
 				driver.navigate().back();
@@ -384,5 +395,397 @@ public class HomePage
         }
 		return status;
 	}
+	
+	public ArrayList<String> checkRegisterTab() 
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		try 
+		{
+			status.add(this.clickWebElement(RegisterButtonlocator));
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> checkGoogleButtonFromRegisterPage() {
+		ArrayList<String> status = new ArrayList<String>();
+		googleButtonLocator = "//button[@id='oa2-google-oauth2']";
+		try {
+			status.add(this.clickWebElement(googleButtonLocator));
+			status.add(registerPage.FocusWindow("signin"));
+			driver.get("https://stagecourses.skillup.online/");
+			BaseWindow = driver.getWindowHandle();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkSignTab() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.add(this.clickWebElement(SignInButtonLocator));
+			status.add(registerPage.FocusWindow("login"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkForgotPasswordLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		String forgotPasswordLocator = "//a[@id='forgot-password']";
+		try 
+		{
+			status.add(this.clickWebElement(forgotPasswordLocator));
+			driver.navigate().back();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkGoogleButtonFromSignInPage() {
+		ArrayList<String> status = new ArrayList<String>();
+		dropDownLocator = "//button[@aria-label='Account menu for']";
+		signOutLocator = "//a[normalize-space()='Sign out']";
+		homePageLink = "//a[normalize-space()='click here to go to the home page']";
+		try
+		{
+			status.add(this.clickWebElement(googleButtonLocator));
+			status.add(registerPage.FocusWindow("signin"));
+			driver.get("https://stagecourses.skillup.online/");
+			BaseWindow = driver.getWindowHandle();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkSignInProcess(ArrayList<String> data) {
+		ArrayList<String> status = new ArrayList<String>();
+		try 
+		{
+			status.addAll(signInPage.signInProcess(data));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+			System.out.println("sign in done");
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkDashboardURL()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		try 
+		{
+			status.add(registerPage.FocusWindow("learner-dashboard"));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+			System.out.println("Dashboard URL verified");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkUsernameFromDashboard()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		usernameFromDashboardLocator = "//button[contains(@aria-label,'Account menu for')]";
+		try 
+		{
+			if(driver.findElements(By.xpath(usernameFromDashboardLocator)).size()>0)
+			{
+				System.out.println("Username is displayed on dashboard");
+			}
+			else
+			{
+				status.add("Fail");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> CheckFindCourseLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		String FindCourseLocator = "//a[contains(text(),'Find a course ')]";
+		String logoFromExploreCourses = "//img[@alt='SkillUp Home Page']";
+		try {
+			System.out.println("Find course link validation started");
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+			status.add(this.clickWebElement(FindCourseLocator));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+			status.add(registerPage.FocusWindow("courses"));
+			status.add(this.clickWebElement(logoFromExploreCourses));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> CheckBackwardNavigationFromCoursesPage() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			driver.navigate().refresh();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> CheckExploreCourseButton() {
+		ArrayList<String> status = new ArrayList<String>();
+		exploreButtonLocator = "//a[@class='btn btn-brand']";
+		try {
+			status.add(this.clickWebElement(exploreButtonLocator));
+			status.add(registerPage.FocusWindow("courses"));
+			driver.navigate().back();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> CheckSkillupLogoFromDashboard() {
+		ArrayList<String> status = new ArrayList<String>();
+		String TopLogolocator = "//img[@alt='SkillUp']";
+		try {
+			status.add(this.clickWebElement(TopLogolocator));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> CheckColorModeFromDashboard() {
+		ArrayList<String> status = new ArrayList<String>();
+		String colorSlideFromDashboardLocator = "//span[@class='slider round']";
+		try {
+			status.add(this.clickWebElement(colorSlideFromDashboardLocator));
+			WebElement body = driver.findElement(By.tagName("body"));
+			String backgroundColor = body.getCssValue("background-color");
+			System.out.println("Background color is: " + backgroundColor);
+			driver.navigate().back();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> checkExploreCoursePageURL() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.add(this.clickWebElement(exploreButtonLocator));
+			status.add(registerPage.FocusWindow("courses"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckSkillupLogoFromExplore() {
+		ArrayList<String> status = new ArrayList<String>();
+		String skillupLogoLocator = "//img[@alt='SkillUp Home Page']";
+		try {
+			status.add(this.clickWebElement(skillupLogoLocator));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckValidCourseToSearch(String data) {
+		ArrayList<String> status = new ArrayList<String>();
+		String searchTextField = "//input[@id='discovery-input']";
+		String searchButtonlocator = "//button[@title='Search']";
+		String courseTextlocator = "//span[@class='query']";
+		String closeAlert = "//span[@class='fa fa-times']";
+		try {
+			status.add(this.clickWebElement(exploreButtonLocator));
+			
+			status.add(this.clickWebElement(searchTextField));
+			WebElement searchText = driver.findElement(By.xpath(searchTextField));
+			searchText.sendKeys(data);
+			status.add(this.clickWebElement(searchButtonlocator));
+			if(driver.findElements(By.xpath(courseTextlocator)).size()>0)
+			{
+				System.out.println("Course searched text is displayed");
+			}
+			else
+			{
+				status.add("Fail");
+			}
+			if(driver.findElements(By.xpath(closeAlert)).size()>0)
+			{
+				driver.findElement(By.xpath(closeAlert)).click();
+			}
+			else
+			{
+				status.add("Fail");
+			}
+			driver.navigate().refresh();
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckInValidCourseToSearch(String data) {
+		ArrayList<String> status = new ArrayList<String>();
+		String searchTextField = "//input[@id='discovery-input']";
+		String searchButtonlocator = "//button[@title='Search']";
+		
+		String invalidTextAlert = "//div[@class='search-status-label']";
+		try {
+			
+			status.add(this.clickWebElement(searchTextField));
+			WebElement searchText = driver.findElement(By.xpath(searchTextField));
+			searchText.sendKeys(data);
+			status.add(this.clickWebElement(searchButtonlocator));
+			if(driver.findElements(By.xpath(invalidTextAlert)).size()>0)
+			{
+				System.out.println("Invalid text alert is displayed");
+			}
+			else
+			{
+				status.add("Fail");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckEmptyFieldToSearch() {
+		ArrayList<String> status = new ArrayList<String>();
+		String searchTextField = "//input[@id='discovery-input']";
+		String searchButtonlocator = "//button[@title='Search']";
+		
+		try {
+			driver.navigate().refresh();
+			status.add(this.clickWebElement(searchTextField));
+			WebElement searchText = driver.findElement(By.xpath(searchTextField));
+			searchText.sendKeys(" ");
+			status.add(this.clickWebElement(searchButtonlocator));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckSkillupLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		String skillupLinkOnFooter = "//a[normalize-space()='Skillup Online']";
+		try {
+			status.add(this.clickWebElement(skillupLinkOnFooter));
+			status.add(registerPage.FocusWindow("https://skillup.online/"));
+			driver.close();
+			driver.switchTo().window(BaseWindow);
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckAboutUsLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckAboutUsLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckBlogLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckBlogLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckDonateLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckDonateLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckTOSLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckTOSLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckPrivacyPolicyLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckPrivacyPolicyLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckHelpLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckHelpLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> CheckContactUsLink() {
+		ArrayList<String> status = new ArrayList<String>();
+		try {
+			status.addAll(this.CheckContactUsLinkFromHome());
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
 	
 }

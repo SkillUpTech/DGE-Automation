@@ -95,7 +95,7 @@ public class HomePageTest implements Callable<String>
 			 		checkGoogleButtonFromSignInPage();
 			        break;
 			 	case "checkSignInProcess":
-			 		checkSignInProcess();
+			 		checkSignInProcess(row);
 			        break;
 			 	case "checkDashboardURL":
 			 		checkDashboardURL();
@@ -122,10 +122,10 @@ public class HomePageTest implements Callable<String>
 			 		CheckSkillupLogoFromExplore();
 			        break;
 			 	case "CheckValidCourseToSearch":
-			 		CheckValidCourseToSearch();
+			 		CheckValidCourseToSearch(row.get(1));
 			        break;
 			 	case "CheckInValidCourseToSearch":
-			 		CheckInValidCourseToSearch();
+			 		CheckInValidCourseToSearch(row.get(1));
 			        break;
 			 	case "CheckEmptyFieldToSearch":
 			 		CheckEmptyFieldToSearch();
@@ -177,7 +177,7 @@ public class HomePageTest implements Callable<String>
 				sheetStatus = "Fail"; // Set status to Fail if there are errors
 				Map<String, ArrayList<ArrayList<String>>> excelData = com.skillup.dge.testPages.RegressionTesting.EXCEL_DATA_AS_SHEEET_NAME_AND_ROWS_MAP;
 
-				List<ArrayList<String>> sheetData = excelData.get("card");
+				List<ArrayList<String>> sheetData = excelData.get("VennilaDasboard");
 
 				while (sheetData.size() <= rowIndex) {
 					sheetData.add(new ArrayList<>()); // Add new rows if missing
@@ -403,10 +403,10 @@ public class HomePageTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
-	public void checkSignInProcess() {
+	public void checkSignInProcess(ArrayList<String> data) {
 		try {
 
-			ArrayList<String> status = homePage.checkSignInProcess();
+			ArrayList<String> status = homePage.checkSignInProcess(data);
 			updateExcelData(status, 23);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -505,23 +505,23 @@ public class HomePageTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
-	public void CheckValidCourseToSearch()
+	public void CheckValidCourseToSearch(String data)
 	{
 
 		try {
 
-			ArrayList<String> status = homePage.CheckValidCourseToSearch();
+			ArrayList<String> status = homePage.CheckValidCourseToSearch(data);
 			updateExcelData(status, 35);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void CheckInValidCourseToSearch()
+	public void CheckInValidCourseToSearch(String data)
 	{
 
 		try {
 
-			ArrayList<String> status = homePage.CheckInValidCourseToSearch();
+			ArrayList<String> status = homePage.CheckInValidCourseToSearch(data);
 			updateExcelData(status, 36);
 		} catch (Exception e) {
 			e.printStackTrace();
