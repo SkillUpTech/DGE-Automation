@@ -523,47 +523,14 @@ public class HomePage
 		String FindCourseLocator = "//a[contains(text(),'Find a course ')]";
 		String logoFromExploreCourses = "//img[@alt='SkillUp Home Page']";
 		try {
+			
 			System.out.println("Find course link validation started");
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 			status.add(this.clickWebElement(FindCourseLocator));
+			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
-			status.add(registerPage.FocusWindow("courses"));
+			status.add(registerPage.FocusWindow("https://stagecourses.skillup.online/courses"));
 			status.add(this.clickWebElement(logoFromExploreCourses));
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
-		} catch (Exception e) {
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	public ArrayList<String> CheckBackwardNavigationFromCoursesPage() {
-		ArrayList<String> status = new ArrayList<String>();
-		try {
-			driver.navigate().refresh();
-		} catch (Exception e) {
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	public ArrayList<String> CheckExploreCourseButton() {
-		ArrayList<String> status = new ArrayList<String>();
-		exploreButtonLocator = "//a[@class='btn btn-brand']";
-		try {
-			status.add(this.clickWebElement(exploreButtonLocator));
-			status.add(registerPage.FocusWindow("courses"));
-			driver.navigate().back();
-		} catch (Exception e) {
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	public ArrayList<String> CheckSkillupLogoFromDashboard() {
-		ArrayList<String> status = new ArrayList<String>();
-		String TopLogolocator = "//img[@alt='SkillUp']";
-		try {
-			status.add(this.clickWebElement(TopLogolocator));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -587,31 +554,6 @@ public class HomePage
 		return status;
 	}
 	
-	public ArrayList<String> checkExploreCoursePageURL() {
-		ArrayList<String> status = new ArrayList<String>();
-		try {
-			status.add(this.clickWebElement(exploreButtonLocator));
-			status.add(registerPage.FocusWindow("courses"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	
-	public ArrayList<String> CheckSkillupLogoFromExplore() {
-		ArrayList<String> status = new ArrayList<String>();
-		String skillupLogoLocator = "//img[@alt='SkillUp Home Page']";
-		try {
-			status.add(this.clickWebElement(skillupLogoLocator));
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
-		} catch (Exception e) {
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	
 	public ArrayList<String> CheckValidCourseToSearch(String data) {
 		ArrayList<String> status = new ArrayList<String>();
 		String searchTextField = "//input[@id='discovery-input']";
@@ -619,7 +561,7 @@ public class HomePage
 		String courseTextlocator = "//span[@class='query']";
 		String closeAlert = "//span[@class='fa fa-times']";
 		try {
-			status.add(this.clickWebElement(exploreButtonLocator));
+			//status.add(this.clickWebElement(exploreButtonLocator));
 			
 			status.add(this.clickWebElement(searchTextField));
 			WebElement searchText = driver.findElement(By.xpath(searchTextField));
@@ -700,7 +642,7 @@ public class HomePage
 		String skillupLinkOnFooter = "//a[normalize-space()='Skillup Online']";
 		try {
 			status.add(this.clickWebElement(skillupLinkOnFooter));
-			status.add(registerPage.FocusWindow("https://skillup.online/"));
+			status.add(registerPage.FocusWindow("https://in.skillup.online/"));
 			driver.close();
 			driver.switchTo().window(BaseWindow);
 		} catch (Exception e) {

@@ -18,27 +18,17 @@ public class RegisterPage
 	{
 		this.driver = driver;
 	}
-	public String FocusWindow(String windowName)
+	public String FocusWindow(String partialUrl)
 	{
-		boolean checkWindow = false;
-		String status = "";
-		Set<String> windowHandles = driver.getWindowHandles();
-		for (String window : windowHandles) 
-		{
-			driver.switchTo().window(window);
-			if (driver.getCurrentUrl().contains(windowName)) 
-			{
-				driver.switchTo().window(window);
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-				System.out.println("Register page is displayed successfully");
-				checkWindow = true;
-			}
-		}
-		if(checkWindow == false)
-		{
-			status = "Fail";
-		}
-		return status;
+	    Set<String> windowHandles = driver.getWindowHandles();
+	    for (String window : windowHandles) {
+	        driver.switchTo().window(window);
+	        if (driver.getCurrentUrl().contains(partialUrl)) {
+	            System.out.println("Target window with URL containing '" + partialUrl + "' is displayed successfully");
+	            return "";
+	        }
+	    }
+	    return "Fail";
 	}
 	public ArrayList<String> checkErrorMessage()
 	{

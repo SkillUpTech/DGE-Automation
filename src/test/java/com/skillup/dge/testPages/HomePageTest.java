@@ -106,20 +106,8 @@ public class HomePageTest implements Callable<String>
 			 	case "CheckFindCourseLink":
 			 		CheckFindCourseLink();
 			        break;
-			 	case "CheckBackwardNavigationFromCoursesPage":
-			 		CheckBackwardNavigationFromCoursesPage();
-			        break;
-			 	case "CheckExploreCourseButton":
-			 		CheckExploreCourseButton();
-			        break;
-			 	case "CheckSkillupLogoFromDashboard":
-			 		CheckSkillupLogoFromDashboard();
-			        break;
-			 	case "checkExploreCoursePageURL":
-			 		checkExploreCoursePageURL();
-			        break;
-			 	case "CheckSkillupLogoFromExplore":
-			 		CheckSkillupLogoFromExplore();
+			 	case "CheckColorModeFromDashboard":
+			 		CheckColorModeFromDashboard();
 			        break;
 			 	case "CheckValidCourseToSearch":
 			 		CheckValidCourseToSearch(row.get(1));
@@ -442,36 +430,6 @@ public class HomePageTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
-	public void CheckBackwardNavigationFromCoursesPage()
-	{
-		try {
-
-			ArrayList<String> status = homePage.CheckBackwardNavigationFromCoursesPage();
-			updateExcelData(status, 28);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void CheckExploreCourseButton()
-	{
-		try {
-
-			ArrayList<String> status = homePage.CheckExploreCourseButton();
-			updateExcelData(status, 29);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void CheckSkillupLogoFromDashboard()
-	{
-		try {
-
-			ArrayList<String> status = homePage.CheckSkillupLogoFromDashboard();
-			updateExcelData(status, 30);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	public void CheckColorModeFromDashboard()
 	{
 
@@ -479,28 +437,6 @@ public class HomePageTest implements Callable<String>
 
 			ArrayList<String> status = homePage.CheckColorModeFromDashboard();
 			updateExcelData(status, 31);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkExploreCoursePageURL()
-	{
-
-		try {
-
-			ArrayList<String> status = homePage.checkExploreCoursePageURL();
-			updateExcelData(status, 33);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void CheckSkillupLogoFromExplore()
-	{
-
-		try {
-
-			ArrayList<String> status = homePage.CheckSkillupLogoFromExplore();
-			updateExcelData(status, 34);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
