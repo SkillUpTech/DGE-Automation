@@ -34,12 +34,12 @@ public class HomePage
 	public String clickWebElement(String locator)
 	{
 		 String status = "";
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		    try {
 		        List<WebElement> elements = driver.findElements(By.xpath(locator));
 		        if (!elements.isEmpty())
 		        {
 		            WebElement element = elements.get(0);
-		            JavascriptExecutor js = (JavascriptExecutor) driver;
 		            js.executeScript("arguments[0].scrollIntoView(true);", element);
 		            js.executeScript("arguments[0].click();", element);
 		           
