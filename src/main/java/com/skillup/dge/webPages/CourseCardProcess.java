@@ -1,5 +1,6 @@
 package com.skillup.dge.webPages;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 
 public class CourseCardProcess
 {
@@ -17,6 +19,7 @@ public class CourseCardProcess
 	String courseCardOrganizationText = "";
 	String courseCardDateTextValue = "";
 	String summaryWindow = "";
+	String checkAlertText = "";
 	public CourseCardProcess(WebDriver driver)
 	{
 		this.driver = driver;
@@ -24,7 +27,7 @@ public class CourseCardProcess
 		this.registerPage = new RegisterPage(driver);
 	}
 	
-	public ArrayList<String> checkCourseCardSelection_PastDate(ArrayList<String> data)
+	public ArrayList<String> CourseCardSelection_EnrollCard(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickFindCourse = "//a[contains(text(),'Find a course ')]";
@@ -44,12 +47,12 @@ public class CourseCardProcess
 				{
 					WebElement courseCard = card.findElement(By.xpath(courseCardTitle));
 					courseCardTitleText = courseCard.getText();
-					WebElement courseCardOrganization = card.findElement(By.xpath(courseCardOrg));
-					courseCardOrganizationText = courseCardOrganization.getText();
-					WebElement courseCardDateText = card.findElement(By.xpath(courseCardDate));
-					courseCardDateTextValue = courseCardDateText.getText();
 					if(courseCardTitleText.equals(data.get(1)))
                     {
+						WebElement courseCardOrganization = card.findElement(By.xpath(courseCardOrg));
+						courseCardOrganizationText = courseCardOrganization.getText();
+						WebElement courseCardDateText = card.findElement(By.xpath(courseCardDate));
+						courseCardDateTextValue = courseCardDateText.getText();
 						status.add(homePage.clickWebElement(courseCardButton));
 						status.add(registerPage.FocusWindow("about"));
 						summaryWindow = driver.getWindowHandle();
@@ -98,6 +101,24 @@ public class CourseCardProcess
 		        e.printStackTrace();
 		        status = "Fail";
 		    }
+		return status;
+	}
+
+	public String textComparision(String data1, String data2) 
+	{
+		String status = "";
+		try {
+			if (data1.equals(data2))
+			{
+				System.out.println("Element text matches: " );
+			} else {
+				System.out.println("Element text does not match: ");
+				status = "Fail";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			status = "Fail";
+		}
 		return status;
 	}
 	public ArrayList<String> checkTitleFromCourseAboutPage()
@@ -234,4 +255,316 @@ public class CourseCardProcess
 		return status;
 	}
 	
+	public ArrayList<String> checkUnEnrollOption()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
+		String unenrollButton = "//a[normalize-space()='Unenroll']";
+		checkAlertText = "Unenroll from course?";
+		String locateAlertText = "//div[@class='bg-white p-3 rounded shadow']/h4";
+		try 
+		{
+			status.add(homePage.clickWebElement(settingsLink));
+			status.add(homePage.clickWebElement(unenrollButton));
+			status.add(this.checkWebElementComparision(locateAlertText, checkAlertText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkUnEnrollProcess()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
+		String neverButton = "//button[contains(text(),'Never mind')]";
+		String unenrollButton = "//button[contains(text(),'Unenroll')]";
+		String locateAlertText = "//div[@class='bg-white p-3 rounded shadow']/h4";
+		String selectReasonToUnEnroll = "//div[@role='radiogroup']/div//input[1]";
+		String skipsurveyButton = "//button[contains(text(),'Skip survey')]";
+		String submitSurveyButton = "//button[contains(text(),'Submit reason')]";
+		String clickReturnToDashboard = "//button[contains(text(),'Return to dashboard')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(neverButton));
+			if (driver.findElements(By.xpath(locateAlertText)).size() > 0)
+			{
+				status.add("Fail");
+			}
+			status.add(homePage.clickWebElement(settingsLink));
+			driver.switchTo().alert();
+			status.add(homePage.clickWebElement(unenrollButton));
+			driver.switchTo().alert();
+			status.add(homePage.clickWebElement(selectReasonToUnEnroll));
+			status.add(homePage.clickWebElement(skipsurveyButton));
+			status.add(homePage.clickWebElement(clickReturnToDashboard));
+			status.add(homePage.clickWebElement(settingsLink));
+			driver.switchTo().alert();
+			status.add(homePage.clickWebElement(unenrollButton));
+			driver.switchTo().alert();
+			status.add(homePage.clickWebElement(selectReasonToUnEnroll));
+			status.add(homePage.clickWebElement(submitSurveyButton));
+			status.add(homePage.clickWebElement(clickReturnToDashboard));
+			status.add(registerPage.FocusWindow("learner-dashboard/"));
+			status.add(this.checkWebElementComparision(locateAlertText, checkAlertText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEmailSettingsOption()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
+		String emailSettings = "//a[contains(text(),'Email settings')]";
+		String locateAlertText = "//div[@class='bg-white p-3 rounded shadow']/h4";
+		String EmailAlertText = "Receive course emails?";
+		try 
+		{
+			status.add(homePage.clickWebElement(settingsLink));
+			status.add(homePage.clickWebElement(emailSettings));
+			status.add(this.checkWebElementComparision(locateAlertText, EmailAlertText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEmailSettingProcess()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
+		String emailSettings = "//a[contains(text(),'Email settings')]";
+		String locateAlertText = "//div[@class='bg-white p-3 rounded shadow']/h4";
+		String EmailAlertText = "Receive course emails?";
+		String emailButtonOnOff = "//input[@id='form-field5']";
+		String neverMindButton = "//button[contains(text(),'Never mind')]";
+		String saveSettings = "//button[contains(text(),'Save settings')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(emailButtonOnOff));
+			status.add(homePage.clickWebElement(saveSettings));
+			status.add(homePage.clickWebElement(settingsLink));
+			status.add(homePage.clickWebElement(emailSettings));
+			status.add(this.checkWebElementComparision(locateAlertText, EmailAlertText));
+			status.add(homePage.clickWebElement(neverMindButton));
+			status.add(registerPage.FocusWindow("learner-dashboard/"));
+			status.add(homePage.clickWebElement(settingsLink));
+			status.add(homePage.clickWebElement(emailSettings));
+			status.add(homePage.clickWebElement(emailButtonOnOff));
+			status.add(homePage.clickWebElement(saveSettings));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	String courseCardOrg = "";
+	String courseCardEndDateText = "";
+	public ArrayList<String> checkCourseCardTitleFromContentPage()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		
+		String courseCardTitle = "//div[@id='card-1']//h3/a";
+		
+		String courseCardDetails = "//div[@id='card-1']//span[@data-testid='CourseCardDetails']";
+		
+		String clickBeginCourse = "//div[@id='card-1']//a[contains(text(),'Begin Course')]";
+		
+		String checkContentPageTitle = "//div[@role='heading']";
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
+		try 
+		{
+			WebElement courseCardTitleText = driver.findElement(By.xpath(courseCardTitle));
+			js.executeScript("arguments[0].scrollIntoView(true);", courseCardTitleText);
+			String courseCardTitleTextValue = courseCardTitleText.getText();//course title from course card
+			
+			WebElement courseCardOrgLocator= driver.findElement(By.xpath(courseCardDetails));
+			js.executeScript("arguments[0].scrollIntoView(true);", courseCardOrgLocator);
+			String orgValueFromCard[] = courseCardOrgLocator.getText().split(".");
+			
+			courseCardOrg = orgValueFromCard[0]; // card org value
+			
+			courseCardEndDateText = orgValueFromCard[2]; //end date from course 
+			
+			status.add(homePage.clickWebElement(clickBeginCourse));
+			status.add(this.checkWebElementComparision(checkContentPageTitle, courseCardTitleTextValue));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCourseCardOrgFromContentPage()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String orgLocatorFromContent = "//span[@class='d-block org']";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try 
+		{
+			WebElement locateOrgFromContentPage = driver.findElement(By.xpath(orgLocatorFromContent));
+			js.executeScript("arguments[0].scrollIntoView(true);", locateOrgFromContentPage);
+			String orgValueFromContentPage[] = locateOrgFromContentPage.getText().split(" ");
+			
+			status.add(this.textComparision(courseCardOrg, orgValueFromContentPage[0]));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCourseCardEndDateFromContentPage()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String courseEndDateLocator = "//div[@class='ml-1 font-weight-bold']";
+		try 
+		{
+			status.add(this.checkWebElementComparision(courseEndDateLocator, courseCardEndDateText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkExpandAllProcess()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String expandAllLink = "//button[contains(text(),'Expand all')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(expandAllLink));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCollapseAll()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String collapseAll = "//button[contains(text(),'Collapse all')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(collapseAll));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkBookMarksLink()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String bookMarksLink = "//a[contains(text(),'Bookmarks')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(bookMarksLink));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkLaunchTourLink()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String launchTourLink = "//li[@id='courseHome-launchTourLink']//button[contains(text(),'Launch tour')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(launchTourLink));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkViewAllCourseLink()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String ViewAllCourseLink = "//a[contains(text(),'View all course dates')]";
+		try 
+		{
+			status.add(homePage.clickWebElement(ViewAllCourseLink));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkAllLinksFromCourseContent()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String expandAllLink = "//button[contains(text(),'Expand all')]";
+		String courseOutlineSectionLink = "//ol[@id='courseHome-outline']/li//ol[@class='list-unstyled']/li//a";
+		String frameForVideo = "//div[@class='unit-iframe-wrapper']//iframe";
+		String playVideo = "//div[@id='player']//button[@title='Play']";
+		String NextButtonAtBottom = "//div[@class='unit-navigation d-flex']/a";
+		String pauseVideo = "//button[@class='control video_control pause']";
+		String courseContentPage = "";
+		String courseOutlineSectionURLText = "";
+		try 
+		{
+			status.add(homePage.clickWebElement(expandAllLink));
+			List<WebElement> courseOutlineSection = driver.findElements(By.xpath(courseOutlineSectionLink));
+			for (WebElement courseOutlineSectionLocator : courseOutlineSection) 
+			{
+				courseOutlineSectionURLText = courseOutlineSectionLocator.getAttribute("href");
+				courseContentPage = driver.getWindowHandle();
+				driver.switchTo().newWindow(WindowType.TAB);
+				driver.get(courseOutlineSectionURLText);
+				System.out.println("Course content page URL: " + courseOutlineSectionURLText);
+				break;
+			}
+			
+			while(driver.findElements(By.xpath(NextButtonAtBottom)).size()>0)
+			{
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (driver.findElements(By.xpath(frameForVideo)).size() > 0)
+				{
+					System.out.println("Specific iframe is available.");
+					driver.switchTo().frame(0);
+					status.add(homePage.clickWebElement(playVideo));
+					status.add(homePage.clickWebElement(pauseVideo));
+				} 
+				else
+				{
+					System.out.println("Specific iframe is NOT available.");
+				}
+				status.add(homePage.clickWebElement(NextButtonAtBottom));
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
 }

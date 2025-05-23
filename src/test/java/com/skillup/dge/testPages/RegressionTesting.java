@@ -170,6 +170,9 @@ public class RegressionTesting
 						case "VennilaDasboard":
 							taskMap.put(sheetName, new HomePageTest(driver, sheetData));
 							break;
+						case "CourseCard_AIF":
+							taskMap.put(sheetName, new CourseCardProcessTest(driver, sheetData));
+							break;
 							default:
 								System.out.println("Not class found to work with the sheet");
 						}

@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-16T22:45:32 IST" name="Testing Google Apps" finished-at="2025-05-16T22:46:50 IST" duration-ms="78654">
+  <suite started-at="2025-05-23T14:54:40 IST" name="Testing Google Apps" finished-at="2025-05-23T14:57:46 IST" duration-ms="185400">
     <groups>
     </groups>
-    <test started-at="2025-05-16T22:45:32 IST" name="Regression" finished-at="2025-05-16T22:46:50 IST" duration-ms="78654">
+    <test started-at="2025-05-23T14:54:40 IST" name="Regression" finished-at="2025-05-23T14:57:46 IST" duration-ms="185400">
       <class name="com.skillup.dge.testPages.RegressionTesting">
-        <test-method is-config="true" signature="setup(java.lang.String,java.lang.String)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@6c284af]" started-at="2025-05-16T22:45:32 IST" name="setup" finished-at="2025-05-16T22:45:37 IST" duration-ms="5619" status="PASS">
+        <test-method is-config="true" signature="setup(java.lang.String,java.lang.String)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-23T14:54:40 IST" name="setup" finished-at="2025-05-23T14:54:51 IST" duration-ms="10353" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -23,15 +23,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@6c284af]" started-at="2025-05-16T22:45:37 IST" name="startTesting" finished-at="2025-05-16T22:46:50 IST" duration-ms="72983" status="PASS">
+        <test-method signature="startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-23T14:54:51 IST" name="startTesting" finished-at="2025-05-23T14:57:46 IST" duration-ms="174950" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startTesting -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@6c284af]" started-at="2025-05-16T22:46:50 IST" name="afterMethod" finished-at="2025-05-16T22:46:50 IST" duration-ms="6" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad]" started-at="2025-05-23T14:57:46 IST" name="afterMethod" finished-at="2025-05-23T14:57:46 IST" duration-ms="9" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=startTesting status=SUCCESS method=RegressionTesting.startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@6c284af] output={null}]]]>
+                <![CDATA[[TestResult name=startTesting status=SUCCESS method=RegressionTesting.startTesting()[pri:0, instance:com.skillup.dge.testPages.RegressionTesting@4f32a3ad] output={null}]]]>
               </value>
             </param>
           </params>
