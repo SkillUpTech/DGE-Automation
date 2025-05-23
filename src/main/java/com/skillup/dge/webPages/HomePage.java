@@ -53,6 +53,29 @@ public class HomePage
 		    }
 		return status;
 	}
+	public String openLinkInNewTab(String locator)
+	{
+		 String status = "";
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		    try {
+		        List<WebElement> elements = driver.findElements(By.xpath(locator));
+		        if (!elements.isEmpty())
+		        {
+		            WebElement element = elements.get(0);
+		            js.executeScript("arguments[0].scrollIntoView(true);", element);
+		            String getURL = element.getAttribute("href");
+		            driver.switchTo().newWindow(WindowType.TAB); // Open a new tab
+		            driver.get(getURL); // Navigate to the URL
+		        } else {
+		            System.out.println("Element not found: " + locator);
+		            status = "Fail";
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        status = "Fail";
+		    }
+		return status;
+	}
 	public ArrayList<String> checkHomePageURL(String url)
 	{
 		ArrayList<String> status = new ArrayList<String>();
