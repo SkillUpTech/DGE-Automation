@@ -17,7 +17,9 @@ public class CourseCardProcess
 	RegisterPage registerPage;
 	String courseCardTitleText = "";
 	String courseCardOrganizationText = "";
-	String courseCardDateTextValue;
+	String courseCardDateTextValue = "";
+	String courseCardStartDateTextValue;
+	String courseCardEndDateTextValue;
 	String summaryWindow = "";
 	String checkAlertText = "";
 	public CourseCardProcess(WebDriver driver)
@@ -379,7 +381,8 @@ public class CourseCardProcess
 		String courseCardTitle = ".//span[@class='course-title']";
 		String courseCardOrg = ".//span[@class='course-organization']";
 		String courseCardButton = ".//a[@class='learn-more']";
-		String courseCardDate = ".//div[@class='course-date']";
+		String courseCardDate = ".//div[@class='course-date']"; // course card starts date
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try 
 		{
 			status.add(homePage.clickWebElement(clickFindCourse));
@@ -399,7 +402,7 @@ public class CourseCardProcess
 						String courseCardDateText[] = courseCardDateLocate.getText().split("Starts:");
 						courseCardDateTextValue = courseCardDateText[1];
 						WebElement  locateCard = card.findElement(By.xpath(courseCardButton));
-						JavascriptExecutor js = (JavascriptExecutor) driver;
+						
 						js.executeScript("arguments[0].scrollIntoView(true);", locateCard);
 						js.executeScript("arguments[0].click();", locateCard);
 						status.add(registerPage.FocusWindow("about"));
@@ -419,36 +422,15 @@ public class CourseCardProcess
 	}
 	String courseCardOrg = "";
 	String courseCardEndDateText = "";
-	public ArrayList<String> checkCourseCardTitleFromContentPage()
+	public ArrayList<String> checkCourseCardTitleWithSummaryPage()
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		
-		String courseCardTitle = "//div[@id='card-1']//h3/a";
-		
-		String courseCardDetails = "//div[@id='card-1']//span[@data-testid='CourseCardDetails']";
-		
-		String clickBeginCourse = "//div[@id='card-1']//a[contains(text(),'Begin Course')]";
-		
-		String checkContentPageTitle = "//div[@role='heading']";
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String titleSummaryPage = "//div[@class='profile-top']//h1";
 		
 		try 
 		{
-			WebElement courseCardTitleText = driver.findElement(By.xpath(courseCardTitle));
-			js.executeScript("arguments[0].scrollIntoView(true);", courseCardTitleText);
-			String courseCardTitleTextValue = courseCardTitleText.getText();//course title from course card
-			
-			WebElement courseCardOrgLocator= driver.findElement(By.xpath(courseCardDetails));
-			js.executeScript("arguments[0].scrollIntoView(true);", courseCardOrgLocator);
-			String orgValueFromCard[] = courseCardOrgLocator.getText().split(".");
-			
-			courseCardOrg = orgValueFromCard[0]; // card org value
-			
-			courseCardEndDateText = orgValueFromCard[2]; //end date from course 
-			
-			status.add(homePage.clickWebElement(clickBeginCourse));
-			status.add(this.checkWebElementComparision(checkContentPageTitle, courseCardTitleTextValue));
+			status.add(this.checkWebElementComparision(titleSummaryPage, courseCardTitleText));
 		}
 		catch (Exception e) 
 		{
@@ -457,18 +439,118 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	public ArrayList<String> checkCourseCardOrgFromContentPage()
+	public ArrayList<String> checkCourseCardOrgWithSummaryPage()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String orgLocatorFromContent = "//div[@class='info-profile']//span[@class='org']";
+		try 
+		{
+			status.add(this.checkWebElementComparision(orgLocatorFromContent, courseCardOrganizationText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCourseCardDateWithSummaryPage()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String courseEndDateLocator = "//div[@class='ml-1 font-weight-bold']";
+		try 
+		{
+			//status.add(this.checkWebElementComparision(courseEndDateLocator, courseCardEndDateText));
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	
+	public ArrayList<String> checkCourseCardTitleWithDashboard()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		
+		String cardsList = "//div[@data-testid='CourseCard']";
+		
+		String courseCardTitle = ".//*[@class='course-card-title']";
+		
+		String clickEnroll = "//a[contains(text(),' Enroll Now')]";
+		
+		try 
+		{
+			WebElement enrollButton = driver.findElement(By.xpath(clickEnroll));
+			if (enrollButton.isDisplayed()) {
+				System.out.println("Enroll button is displayed.");
+				status.add(homePage.clickWebElement(clickEnroll));
+			} else {
+				System.out.println("Enroll button is not displayed.");
+				status.add("Fail");
+			}
+			List<WebElement> cardsFromDashboard = driver.findElements(By.xpath(cardsList));
+			for (WebElement card : cardsFromDashboard) 
+			{
+				WebElement courseCardTitleFromDashboardLocator = card.findElement(By.xpath(courseCardTitle));
+				String courseCardTitleTextFromDashboard = courseCardTitleFromDashboardLocator.getText();
+				if(courseCardTitleText.equals(courseCardTitleTextFromDashboard))
+				{
+					status.add(this.textComparision(courseCardTitleTextFromDashboard, courseCardTitleText));
+				}
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCourseCardOrgWithDashboard()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String cardsList = "//div[@data-testid='CourseCard']";
+		String courseCardTitle = ".//*[@class='course-card-title']";
+		String courseCardDetails = ".//div[contains(@class,'card-section')]//*[@data-testid='CourseCardDetails']";//org, date, etc.
+		try 
+		{
+			List<WebElement> cardsFromDashboard = driver.findElements(By.xpath(cardsList));
+			for (WebElement card : cardsFromDashboard) 
+			{
+				WebElement courseCardTitleFromDasboardLocator = card.findElement(By.xpath(courseCardTitle));
+				String	courseCardTitleTextFromDashboard = courseCardTitleFromDasboardLocator.getText();
+				if(courseCardTitleText.equals(courseCardTitleTextFromDashboard))
+				{
+					WebElement courseCardDetailsLocator = card.findElement(By.xpath(courseCardDetails));
+					String getORGFromDashboard = courseCardDetailsLocator.getText();
+					String getOrgFromDashboard[] = getORGFromDashboard.split("•");
+					System.out.println("Organization from dashboard: " + getOrgFromDashboard[0]);
+					if(getOrgFromDashboard[0].trim().equals(courseCardOrganizationText.trim()))
+					{
+						System.out.println("Organization matches: " + courseCardOrg);
+					} else {
+						System.out.println("Organization does not match: " + courseCardOrg);
+						status.add("Fail");
+					}
+				}
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkCourseCardDateWithDashboard()
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String orgLocatorFromContent = "//span[@class='d-block org']";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try 
 		{
-			WebElement locateOrgFromContentPage = driver.findElement(By.xpath(orgLocatorFromContent));
-			js.executeScript("arguments[0].scrollIntoView(true);", locateOrgFromContentPage);
-			String orgValueFromContentPage[] = locateOrgFromContentPage.getText().split(" ");
-			
-			status.add(this.textComparision(courseCardOrg, orgValueFromContentPage[0]));
 		}
 		catch (Exception e) 
 		{
@@ -477,27 +559,53 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	public ArrayList<String> checkCourseCardEndDateFromContentPage()
+	
+	public ArrayList<String> clickWebElements(WebElement parent, By clickBeginCourseFromDashboardLocator)
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String courseEndDateLocator = "//div[@class='ml-1 font-weight-bold']";
-		try 
+		try
 		{
-			status.add(this.checkWebElementComparision(courseEndDateLocator, courseCardEndDateText));
+			if (parent.findElements(clickBeginCourseFromDashboardLocator).size() > 0)
+			{
+				WebElement childElement = parent.findElement(clickBeginCourseFromDashboardLocator);
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView(true);", childElement);
+				js.executeScript("arguments[0].click();", childElement);
+			} 
+			else {
+				System.out.println("Child element not found: " + clickBeginCourseFromDashboardLocator.toString());
+				status.add("Fail");
+			}
 		}
-		catch (Exception e) 
-		{
+		catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Unable to click on the element: " + clickBeginCourseFromDashboardLocator.toString());
 			status.add("Fail");
 		}
 		return status;
 	}
+	
 	public ArrayList<String> checkExpandAllProcess()
 	{
 		ArrayList<String> status = new ArrayList<String>();
+		String clickBeginCourse = ".//a[contains(text(),'Begin Course')]";
 		String expandAllLink = "//button[contains(text(),'Expand all')]";
+		String cardsList = "//div[@data-testid='CourseCard']";
+		String courseCardTitle = ".//*[@class='course-card-title']";
+		
 		try 
 		{
+			List<WebElement> cardsFromDashboard = driver.findElements(By.xpath(cardsList));
+			for (WebElement card : cardsFromDashboard) 
+			{
+				WebElement courseCardTitleFromDashboardLocator = card.findElement(By.xpath(courseCardTitle));
+				String courseCardTitleTextFromDashboard = courseCardTitleFromDashboardLocator.getText();
+				if(courseCardTitleText.equals(courseCardTitleTextFromDashboard))
+				{
+					By clickBeginCourseFromDashboardLocator = By.xpath(clickBeginCourse);
+					status.addAll(this.clickWebElements(card, clickBeginCourseFromDashboardLocator));
+				}
+			}
 			status.add(homePage.clickWebElement(expandAllLink));
 		}
 		catch (Exception e) 

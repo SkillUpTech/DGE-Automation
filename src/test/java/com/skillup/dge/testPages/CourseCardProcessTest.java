@@ -84,15 +84,26 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "EnrollCardToCompleteCourse":
 			 		checkEnrollCardToCompleteCourse(row);
 			        break;
-			 	case "checkCourseCardTitleFromContentPage":
-			 		checkCourseCardTitleFromContentPage();
+			 	case "checkCourseCardTitleWithSummaryPage":
+			 		checkCourseCardTitleWithSummaryPage();
 			        break;
-			 	case "checkCourseCardOrgFromContentPage":
-			 		checkCourseCardOrgFromContentPage();
+			 	case "checkCourseCardOrgWithSummaryPage":
+			 		checkCourseCardOrgWithSummaryPage();
 			        break;
-			 	case "checkCourseCardEndDateFromContentPage":
-			 		checkCourseCardEndDateFromContentPage();
+				/*
+				 * case "checkCourseCardDateWithSummaryPage":
+				 * checkCourseCardDateWithSummaryPage(); break;
+				 */
+			 	case "checkCourseCardTitleWithDashboard":
+			 		checkCourseCardTitleWithDashboard();
 			        break;
+			 	case "checkCourseCardOrgWithDashboard":
+			 		checkCourseCardOrgWithDashboard();
+			        break;
+				/*
+				 * case "checkCourseCardDateWithDashboard": checkCourseCardDateWithDashboard();
+				 * break;
+				 */
 			 	case "checkExpandAllProcess":
 			 		checkExpandAllProcess();
 			        break;
@@ -307,28 +318,55 @@ public class CourseCardProcessTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
-	public void checkCourseCardTitleFromContentPage() {
+	public void checkCourseCardTitleWithSummaryPage() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkCourseCardTitleWithSummaryPage();
 			updateExcelData(status, 19);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void checkCourseCardOrgFromContentPage() {
+	public void checkCourseCardOrgWithSummaryPage() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkCourseCardOrgWithSummaryPage();
 			updateExcelData(status, 20);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void checkCourseCardEndDateFromContentPage() {
+	public void checkCourseCardDateWithSummaryPage() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkCourseCardDateWithSummaryPage();
+			updateExcelData(status, 21);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkCourseCardTitleWithDashboard() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkCourseCardTitleWithDashboard();
+			updateExcelData(status, 19);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkCourseCardOrgWithDashboard() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkCourseCardOrgWithDashboard();
+			updateExcelData(status, 20);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkCourseCardDateWithDashboard() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkCourseCardDateWithDashboard();
 			updateExcelData(status, 21);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -337,7 +375,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkExpandAllProcess() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkExpandAllProcess();
 			updateExcelData(status, 22);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -346,7 +384,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkCollapseAll() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkCollapseAll();
 			updateExcelData(status, 23);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -355,7 +393,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkBookMarksLink() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkBookMarksLink();
 			updateExcelData(status, 24);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -364,7 +402,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkLaunchTourLink() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkLaunchTourLink();
 			updateExcelData(status, 25);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -373,7 +411,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkViewAllCourseLink() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkViewAllCourseLink();
 			updateExcelData(status, 26);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -382,7 +420,7 @@ public class CourseCardProcessTest implements Callable<String>
 	public void checkAllLinksFromCourseContent() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollButton();
+			ArrayList<String> status = courseCardProcess.checkAllLinksFromCourseContent();
 			updateExcelData(status, 27);
 		} catch (Exception e) {
 			e.printStackTrace();
