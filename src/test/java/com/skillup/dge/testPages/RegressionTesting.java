@@ -170,7 +170,7 @@ public class RegressionTesting
 						case "VennilaDasboard":
 							taskMap.put(sheetName, new HomePageTest(driver, sheetData));
 							break;
-						case "CourseCard_AIF":
+						case "CourseCard_BSN":
 							taskMap.put(sheetName, new CourseCardProcessTest(driver, sheetData));
 							break;
 							default:

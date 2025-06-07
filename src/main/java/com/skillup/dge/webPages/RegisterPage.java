@@ -18,12 +18,22 @@ public class RegisterPage
 	{
 		this.driver = driver;
 	}
-	public String FocusWindow(String partialUrl)
+	public String FocusWindow(String partialUrl) throws InterruptedException
 	{
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 	    Set<String> windowHandles = driver.getWindowHandles();
-	    for (String window : windowHandles) {
+	    Thread.sleep(500); 
+	    for (String window : windowHandles)
+	    {
+	    	Thread.sleep(500); 
 	        driver.switchTo().window(window);
-	        if (driver.getCurrentUrl().contains(partialUrl)) {
+	        Thread.sleep(500); // Wait for the window to load
+	        if (driver.getCurrentUrl().contains(partialUrl)) 
+	        {
+	        	Thread.sleep(500); 
+	        	driver.switchTo().window(window);
+	        	Thread.sleep(500); 
 	            System.out.println("Target window with URL containing '" + partialUrl + "' is displayed successfully");
 	            return "";
 	        }

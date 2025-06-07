@@ -24,6 +24,7 @@ public class HomePage
 	String exploreButtonLocator = "";
 	RegisterPage registerPage;
 	SignInPage signInPage;
+	
 	public HomePage(WebDriver driver)
 	{
 		this.driver = driver;
@@ -35,19 +36,28 @@ public class HomePage
 	{
 		 String status = "";
 		 JavascriptExecutor js = (JavascriptExecutor) driver;
-		    try {
+		    try
+		    {
+		    	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		    	driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		        List<WebElement> elements = driver.findElements(By.xpath(locator));
 		        if (!elements.isEmpty())
 		        {
 		            WebElement element = elements.get(0);
 		            js.executeScript("arguments[0].scrollIntoView(true);", element);
 		            js.executeScript("arguments[0].click();", element);
+		            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		           
-		        } else {
+		        } 
+		        else
+		        {
 		            System.out.println("Element not found: " + locator);
 		            status = "Fail";
 		        }
-		    } catch (Exception e) {
+		    }
+		    catch (Exception e)
+		    {
 		        e.printStackTrace();
 		        status = "Fail";
 		    }
