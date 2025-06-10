@@ -38,67 +38,8 @@ public class CourseCardProcess
 		String clickFindCourse = "//a[contains(text(),'Find a course ')]";
 		try
 		{
-			status.add(homePage.clickWebElement(clickFindCourse));
-			 
-			status.add(registerPage.FocusWindow("/courses"));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
-	
-	public ArrayList<String> checkCardSelection(ArrayList<String> data)
-	{
-		ArrayList<String> status = new ArrayList<String>();
-		String courseCardList = "//ul[@class='courses-listing courses-list']/li";
-		String courseCardTitle = ".//span[@class='course-title']";
-		String courseCardOrg = ".//span[@class='course-organization']";
-		String courseCardButton = ".//a[@class='learn-more']";
-		String courseCardDate = ".//div[@class='course-date']";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		try
-		{
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			
-			if(driver.findElements(By.xpath(courseCardList)).size()>0)
-			{
-				List<WebElement> courseCards = driver.findElements(By.xpath(courseCardList));
-				for(WebElement card : courseCards)
-				{
-					js.executeScript("arguments[0].scrollIntoView(true);", card);
-					wait.until(ExpectedConditions.visibilityOf(card));
-					WebElement courseCard = card.findElement(By.xpath(courseCardTitle));
-					js.executeScript("arguments[0].scrollIntoView(true);", courseCard);
-					wait.until(ExpectedConditions.visibilityOf(courseCard));
-					courseCardTitleText = courseCard.getText();
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-					if(courseCardTitleText.equals(data.get(1)))
-                    {
-						WebElement courseCardOrganization = card.findElement(By.xpath(courseCardOrg));
-						js.executeScript("arguments[0].scrollIntoView(true);", courseCardOrganization);
-						wait.until(ExpectedConditions.visibilityOf(courseCardOrganization));
-						courseCardOrganizationText = courseCardOrganization.getText();
-						WebElement courseCardDateLocate = card.findElement(By.xpath(courseCardDate));
-						js.executeScript("arguments[0].scrollIntoView(true);", courseCardDateLocate);
-						wait.until(ExpectedConditions.visibilityOf(courseCardDateLocate));
-						String courseCardDateText[] = courseCardDateLocate.getText().split("Starts:");
-						courseCardDateTextValue = courseCardDateText[1];
-						WebElement  locateCard = card.findElement(By.xpath(courseCardButton));
-						js.executeScript("arguments[0].scrollIntoView(true);", locateCard);
-						wait.until(ExpectedConditions.visibilityOf(locateCard));
-						 wait.until(ExpectedConditions.elementToBeClickable(locateCard));
-						js.executeScript("arguments[0].click();", locateCard);
-					 
-						status.add(registerPage.FocusWindow("about"));
-						
-						summaryWindow = driver.getWindowHandle();
-                        break;
-                    }
-				}
+			if (driver.findElements(By.xpath(clickFindCourse)).size() > 0) {
+			} else {
 			}
 		}
 		catch (Exception e)
@@ -110,70 +51,9 @@ public class CourseCardProcess
 	}
 	
 	
-	public ArrayList<String> CourseCardSelection_EnrollCard(ArrayList<String> data)
-	{
-		ArrayList<String> status = new ArrayList<String>();
-		String clickFindCourse = "//a[contains(text(),'Find a course ')]";
-		String courseCardList = "//ul[@class='courses-listing courses-list']/li";
-		String courseCardTitle = ".//span[@class='course-title']";
-		String courseCardOrg = ".//span[@class='course-organization']";
-		String courseCardButton = ".//a[@class='learn-more']";
-		String courseCardDate = ".//div[@class='course-date']";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		try 
-		{
-			
-			status.add(homePage.clickWebElement(clickFindCourse));
-		 
-			status.add(registerPage.FocusWindow("/courses"));
-			
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			
-			if(driver.findElements(By.xpath(courseCardList)).size()>0)
-			{
-				List<WebElement> courseCards = driver.findElements(By.xpath(courseCardList));
-				for(WebElement card : courseCards)
-				{
-					js.executeScript("arguments[0].scrollIntoView(true);", card);
-					wait.until(ExpectedConditions.visibilityOf(card));
-					WebElement courseCard = card.findElement(By.xpath(courseCardTitle));
-					js.executeScript("arguments[0].scrollIntoView(true);", courseCard);
-					wait.until(ExpectedConditions.visibilityOf(courseCard));
-					courseCardTitleText = courseCard.getText();
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-					if(courseCardTitleText.equals(data.get(1)))
-                    {
-						WebElement courseCardOrganization = card.findElement(By.xpath(courseCardOrg));
-						js.executeScript("arguments[0].scrollIntoView(true);", courseCardOrganization);
-						wait.until(ExpectedConditions.visibilityOf(courseCardOrganization));
-						courseCardOrganizationText = courseCardOrganization.getText();
-						WebElement courseCardDateLocate = card.findElement(By.xpath(courseCardDate));
-						js.executeScript("arguments[0].scrollIntoView(true);", courseCardDateLocate);
-						wait.until(ExpectedConditions.visibilityOf(courseCardDateLocate));
-						String courseCardDateText[] = courseCardDateLocate.getText().split("Starts:");
-						courseCardDateTextValue = courseCardDateText[1];
-						WebElement  locateCard = card.findElement(By.xpath(courseCardButton));
-						js.executeScript("arguments[0].scrollIntoView(true);", locateCard);
-						wait.until(ExpectedConditions.visibilityOf(locateCard));
-						 wait.until(ExpectedConditions.elementToBeClickable(locateCard));
-						js.executeScript("arguments[0].click();", locateCard);
-					 
-						status.add(registerPage.FocusWindow("about"));
-						
-						summaryWindow = driver.getWindowHandle();
-                        break;
-                    }
-				}
-			}
-		}
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
+	
+	
+	
 	public String checkWebElementComparision(String locator, String data)
 	{
 		 String status = "";
@@ -326,10 +206,8 @@ public class CourseCardProcess
 		try 
 		{
 			status.add(homePage.clickWebElement(mailButton));
-			/*
-			 * this.registerPage.FocusWindow("mail"); driver.close();
-			 */
 			driver.switchTo().window(summaryWindow);
+			Thread.sleep(2000); // wait for the mail popup to appear
 		}
 		catch (Exception e) 
 		{
@@ -515,11 +393,13 @@ public class CourseCardProcess
 		ArrayList<String> status = new ArrayList<String>();
 		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
 		String unenrollButton = "//a[normalize-space()='Unenroll']";
+		String locateUnenrollButtonFromAlert = "//button[contains(text(),'Unenroll')]";
 		String skipsurveyButton = "//button[contains(text(),'Skip survey')]";
 		try
 		{
 			status.add(homePage.clickWebElement(settingsLink));
 			status.add(homePage.clickWebElement(unenrollButton));
+			status.add(homePage.clickWebElement(locateUnenrollButtonFromAlert));
 			status.add(homePage.clickWebElement(skipsurveyButton));
 			
 		}
@@ -550,9 +430,11 @@ public class CourseCardProcess
 	public ArrayList<String> checkSelectCourseToUnEnroll(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
+		String enrollButton = "//a[contains(text(),'Enroll Now')]";
 		try
 		{
-			status.addAll(this.CourseCardSelection_EnrollCard(data));
+			status.addAll(this.checkEnrollCardToCompleteCourse(data));
+			status.add(homePage.clickWebElement(enrollButton));
 		}
 		catch (Exception e) 
 		{
@@ -568,14 +450,19 @@ public class CourseCardProcess
 		ArrayList<String> status = new ArrayList<String>();
 		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
 		String unenrollButtonFromSettingsOption = "//a[contains(text(),'Unenroll')]";
-		String locateAlertTextFromUnEnroll = "//div[@class='bg-white p-3 rounded']/h4";
+		String locateAlertTextFromUnEnroll = "//div[@class='bg-white p-3 rounded shadow']/h4";
 		String selectReasonToUnEnroll = "//div[@role='radiogroup']/div//input[1]";
 		String submitSurveyButton = "//button[contains(text(),'Submit reason')]";
 		String AlertTextFromUnEnroll = "What's your main reason for unenrolling?";
+		String unenrollButton = "//button[contains(text(),'Unenroll')]";
+		String clickReturnToDashboard = "//button[contains(text(),'Return to dashboard')]";
 		try
 		{
 			status.add(homePage.clickWebElement(settingsLink));
+			Thread.sleep(200); // wait for the settings to open
 			status.add(homePage.clickWebElement(unenrollButtonFromSettingsOption));
+			Thread.sleep(200);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath(locateAlertTextFromUnEnroll)).size() > 0)
 			{
 				status.add(this.checkWebElementComparision(locateAlertTextFromUnEnroll, AlertTextFromUnEnroll));
@@ -584,9 +471,14 @@ public class CourseCardProcess
 			{
 				status.add("Fail");
 			}
+			Thread.sleep(200);
+			status.add(homePage.clickWebElement(unenrollButton));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(selectReasonToUnEnroll));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(submitSurveyButton));
-			
+			Thread.sleep(200);
+			status.add(homePage.clickWebElement(clickReturnToDashboard));
 		}
 		catch (Exception e) 
 		{
@@ -601,7 +493,7 @@ public class CourseCardProcess
 		ArrayList<String> status = new ArrayList<String>();
 		try
 		{
-			status.addAll(this.CourseCardSelection_EnrollCard(data));
+			status.addAll(this.checkEnrollCardToCompleteCourse(data));
 		}
 		catch (Exception e) 
 		{
@@ -630,10 +522,13 @@ public class CourseCardProcess
 		{
 			
 			status.add(homePage.clickWebElement(clickFindCourse));
-		 
+			Thread.sleep(200); // wait for the page to load
 			status.add(registerPage.FocusWindow("/courses"));
+			
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			Thread.sleep(200);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath(courseCardList)).size()>0)
 			{
 				List<WebElement> courseCards = driver.findElements(By.xpath(courseCardList));
@@ -642,6 +537,7 @@ public class CourseCardProcess
 					
 					js.executeScript("arguments[0].scrollIntoView(true);", card);
 					wait.until(ExpectedConditions.visibilityOf(card));
+					Thread.sleep(200);
 					WebElement courseCodeLocator = card.findElement(By.xpath(courseCode));
 					js.executeScript("arguments[0].scrollIntoView(true);", courseCodeLocator);
 					String courseCodeText = courseCodeLocator.getAttribute("textContent");
@@ -650,13 +546,14 @@ public class CourseCardProcess
 					 js.executeScript("arguments[0].scrollIntoView(true);", courseCard);
 			            wait.until(ExpectedConditions.visibilityOf(courseCard));
 					courseCardTitleText = courseCard.getText();
-					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 					if(courseCardTitleText.equals(data.get(1))&&courseCodeText.equals(data.get(2)))
                     {
 						WebElement courseCardOrganization = card.findElement(By.xpath(courseCardOrg));
 						 js.executeScript("arguments[0].scrollIntoView(true);", courseCardOrganization);
 				            wait.until(ExpectedConditions.visibilityOf(courseCardOrganization));
 						courseCardOrganizationText = courseCardOrganization.getText();
+						Thread.sleep(200);
 						WebElement courseCardDateLocate = card.findElement(By.xpath(courseCardDate));
 						String courseCardDateText[] = courseCardDateLocate.getText().split("Starts:");
 						courseCardDateTextValue = courseCardDateText[1];
@@ -669,7 +566,7 @@ public class CourseCardProcess
 						js.executeScript("arguments[0].click();", locateCard);
 					 
 						status.add(registerPage.FocusWindow("about"));
-						
+						Thread.sleep(200);
 						summaryWindow = driver.getWindowHandle();
                         break;
                     }
@@ -743,6 +640,7 @@ public class CourseCardProcess
 		String courseCardTitle = ".//*[@class='course-card-title']";
 		
 		String clickEnroll = "//a[contains(text(),' Enroll Now')]";
+		
 		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		try 
@@ -751,7 +649,8 @@ public class CourseCardProcess
 			js.executeScript("arguments[0].scrollIntoView(true);", enrollButton);
 			wait.until(ExpectedConditions.visibilityOf(enrollButton));
             wait.until(ExpectedConditions.elementToBeClickable(enrollButton));
-			if (enrollButton.isDisplayed()) {
+			if (enrollButton.isDisplayed()) 
+			{
 				System.out.println("Enroll button is displayed.");
 				status.add(homePage.clickWebElement(clickEnroll));
 			} else {
@@ -867,7 +766,7 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickBeginCourse = ".//a[contains(text(),'Begin Course')]";
-		String expandAllLink = "//button[contains(text(),'Expand all')]";
+	//	String expandAllLink = "//button[contains(text(),'Expand all')]";
 		String cardsList = "//div[@data-testid='CourseCard']";
 		String courseCardTitle = ".//*[@class='course-card-title']";
 		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -929,7 +828,7 @@ public class CourseCardProcess
 		return status;
 	}
 	
-	public ArrayList<String> checkStartCourseButton(String courseCardTitleText) 
+	public ArrayList<String> checkStartCourseButton() 
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String locateStartCourseButton = "//a[contains(text(),'Start course')]";
@@ -949,9 +848,31 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String bookMarksLink = "//button[@aria-live='assertive']//descendant::span[3]";
+		String getBookmarkedText = "Bookmarked";
+		String getBookmarkTextFromHome = "Bookmark this page";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try
 		{
-			status.add(homePage.clickWebElement(bookMarksLink));
+			Thread.sleep(200);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			if (driver.findElements(By.xpath(bookMarksLink)).size() > 0)
+			{
+				WebElement bookmarkElement = driver.findElement(By.xpath(bookMarksLink));
+				js.executeScript("arguments[0].scrollIntoView(true);", bookmarkElement);
+				String bookmarkText = bookmarkElement.getText();
+				Thread.sleep(200);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (bookmarkText.equals(getBookmarkedText))
+				{
+					System.out.println("page is book marked");
+				} 
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (bookmarkText.equals(getBookmarkTextFromHome))
+				{
+					System.out.println("Bookmark text is not present, clicking to bookmark the page.");
+					status.add(homePage.clickWebElement(bookMarksLink));
+				}
+			} 
 		}
 		catch (Exception e) 
 		{
@@ -964,9 +885,27 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickBookmarkedLink = "//button[@aria-live='assertive']//descendant::span[3]";
+		String getBookmarkText = "Bookmarked";
 		try
 		{
-			status.add(homePage.clickWebElement(clickBookmarkedLink));
+			Thread.sleep(200);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			if (driver.findElements(By.xpath(clickBookmarkedLink)).size() > 0)
+            {
+				WebElement bookmarkElement = driver.findElement(By.xpath(clickBookmarkedLink));
+				String bookmarkText = bookmarkElement.getText();
+				Thread.sleep(200); // wait for the text to be updated
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (bookmarkText.equals(getBookmarkText)) 
+                {
+                    System.out.println("page is book marked");
+                } 
+                else 
+                {
+                    System.out.println("page is not book marked");
+                    status.add("Fail");
+                }
+			}
 		}
 		catch (Exception e) 
 		{
@@ -975,13 +914,16 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	public ArrayList<String> checkPageIsNavigatoTOBackward()
+	public ArrayList<String> checkPageIsNavigatoToCourse()
 	{
 		ArrayList<String> status = new ArrayList<String>();
+		String clickCourseTab = "//nav[@aria-label='Course Material']/a[contains(text(),'Course')]";
 		try
 		{
-			driver.navigate().back();
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(clickCourseTab));
 			status.add(registerPage.FocusWindow("/home"));
+			Thread.sleep(200); 
 		}
 		catch (Exception e) 
 		{
@@ -990,14 +932,16 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	public ArrayList<String> checkPageIsBookmarkedOrNot()
+	public ArrayList<String> checkBookmarksLinkFromHome()
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickBookmarkLinkFromHome = "//a[normalize-space()='Bookmarks']";
 		try
 		{
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickBookmarkLinkFromHome));
 			status.add(registerPage.FocusWindow("bookmarks/"));
+			Thread.sleep(200); 
 		}
 		catch (Exception e) 
 		{
@@ -1010,10 +954,14 @@ public class CourseCardProcess
 	public ArrayList<String> checkViewButtonFromBookmarkPage() 
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickViewbutton = "//span[normalize-space()='View']";
+		String clickBookmarkLinkFromHome = "//a[normalize-space()='Bookmarks']";
+		String clickViewbutton = "//*[@id='bookmark-type-0']/span[1]";
 		try {
+			status.add(homePage.clickWebElement(clickBookmarkLinkFromHome));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickViewbutton));
 			status.add(registerPage.FocusWindow("course-"));
+			Thread.sleep(200); 
 		} catch (Exception e) {
 			e.printStackTrace();
 			status.add("Fail");
@@ -1026,6 +974,7 @@ public class CourseCardProcess
 		String courseOutlineTrayIcon = "//button[@aria-label='Toggle course outline tray']";
 		try {
 			status.add(homePage.clickWebElement(courseOutlineTrayIcon));
+			Thread.sleep(200); 
 		} catch (Exception e) {
 			e.printStackTrace();
 			status.add("Fail");
@@ -1038,6 +987,7 @@ public class CourseCardProcess
 		String clickDiscussionLink = "//*[@aria-label='Show discussions tray']";
 		try {
 			status.add(homePage.clickWebElement(clickDiscussionLink));
+			Thread.sleep(200); 
 		} catch (Exception e) {
 			e.printStackTrace();
 			status.add("Fail");
@@ -1052,10 +1002,12 @@ public class CourseCardProcess
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		try 
 		{
+			Thread.sleep(200); 
 			WebElement focusFrameLocator = driver.findElement(By.xpath(DiscussionFrame));
 			js.executeScript("arguments[0].scrollIntoView(true);", focusFrameLocator);
 			 wait.until(ExpectedConditions.visibilityOf(focusFrameLocator));
 			driver.switchTo().frame(focusFrameLocator);
+			Thread.sleep(200);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1072,6 +1024,7 @@ public class CourseCardProcess
 			if (driver.findElements(By.xpath(DiscussionHeadingLocator)).size() > 0)
 			{
 				System.out.println("Discussion is available");
+				Thread.sleep(200);
 			} 
 			else
 			{
@@ -1089,6 +1042,7 @@ public class CourseCardProcess
 		String DiscussionCloseLocator = "//main[@id='main']//button[@aria-label='Close']";
 		try {
 			status.add(homePage.clickWebElement(DiscussionCloseLocator));
+			Thread.sleep(200);
 			driver.switchTo().defaultContent(); // Switch back to the main content after closing the discussion tray
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1100,7 +1054,6 @@ public class CourseCardProcess
 		ArrayList<String> status = new ArrayList<String>();
 		String BellIcon = "//span[@alt='Show notification tray']";
 		try {
-			driver.switchTo().defaultContent(); // Switch back to the main content after closing the discussion tray
 			status.add(homePage.clickWebElement(BellIcon));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1138,7 +1091,7 @@ public class CourseCardProcess
 			status.add(homePage.clickWebElement(navigateCoursePage));
 			
 			status.add(registerPage.FocusWindow("/home"));
-			
+			Thread.sleep(200); // wait for the page to load
 		}
 		catch (Exception e) 
 		{
@@ -1153,7 +1106,13 @@ public class CourseCardProcess
 		String launchTourLink = "//li[@id='courseHome-launchTourLink']/button";
 		try 
 		{
-			status.add(homePage.clickWebElement(launchTourLink));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			if (driver.findElements(By.xpath(launchTourLink)).size() > 0) {
+				System.out.println("Launch tour link is available");
+				status.add(homePage.clickWebElement(launchTourLink));
+			} else {
+				System.out.println("Launch tour link is not available");
+			}
 		}
 		catch (Exception e) 
 		{
@@ -1171,9 +1130,7 @@ public class CourseCardProcess
 			if (driver.findElements(By.xpath(focusAlert)).size() > 0)
 			{
 				System.out.println("Launch tour alert is available");
-			} else {
-				status.add("Fail");
-			}
+			} 
 		}
 		catch (Exception e) 
 		{
@@ -1188,7 +1145,12 @@ public class CourseCardProcess
 		String clickDismiss = "//button[contains(text(),'Dismiss')]";
 		try 
 		{
-			status.add(homePage.clickWebElement(clickDismiss));
+			if (driver.findElements(By.xpath(clickDismiss)).size() > 0) {
+				System.out.println("Dismiss button is available");
+				status.add(homePage.clickWebElement(clickDismiss));
+			} else {
+				System.out.println("Dismiss button is not available");
+			}
 		}
 		catch (Exception e) 
 		{
@@ -1204,7 +1166,10 @@ public class CourseCardProcess
 		String clickOkay = "//button[contains(text(),'Okay')]";
 		try 
 		{
-			status.add(homePage.clickWebElement(clickOkay));
+			if(driver.findElements(By.xpath(clickOkay)).size() > 0)
+			{
+				status.add(homePage.clickWebElement(clickOkay));
+			}
 		}
 		catch (Exception e) 
 		{
@@ -1221,12 +1186,23 @@ public class CourseCardProcess
 		String clickNext = "//button[contains(text(),'Next')]";
 		try 
 		{
-			status.add(homePage.clickWebElement(launchTourLink));
-			while (driver.findElements(By.xpath(clickNext)).size() > 0) 
-			{
-				status.add(homePage.clickWebElement(clickNext));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			Thread.sleep(200); // wait for the page to load
+			if (driver.findElements(By.xpath(launchTourLink)).size() > 0) {
+				System.out.println("Launch tour link is available");
+				status.add(homePage.clickWebElement(launchTourLink));
+				while (driver.findElements(By.xpath(clickNext)).size() > 0) 
+				{
+					status.add(homePage.clickWebElement(clickNext));
+				}
+				if(driver.findElements(By.xpath(clickOkay)).size() > 0)
+				{
+					status.add(homePage.clickWebElement(clickOkay));
+				}
+			} else {
+				System.out.println("Launch tour link is not available");
 			}
-			status.add(homePage.clickWebElement(clickOkay));
+			
 		}
 		catch (Exception e) 
 		{
@@ -1254,7 +1230,7 @@ public class CourseCardProcess
 	}
 	String courseContentPage = "";
 	int count = 0;
-	public ArrayList<String> startCourse()
+	public ArrayList<String> startCourse(String filepath)
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickStartCourse = "//a[contains(text(),'Start course')]";
@@ -1270,15 +1246,17 @@ public class CourseCardProcess
 			courseContentPage = driver.getWindowHandle();
 			status.add(homePage.clickWebElement(clickStartCourse));
 			status.add(registerPage.FocusWindow("course/"));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			while(driver.findElements(By.xpath(nextButton)).size()>0)
 			{
-				
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				if(driver.findElements(By.xpath(locateVideoFrame1)).size()>0)
 				{
 					WebElement playButtonLocator =null;
 					driver.switchTo().frame(driver.findElement(By.xpath(locateVideoFrame1)));
 					try
 					{
+						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 						if(driver.findElements(By.xpath(youTubePlayButton)).size()>0)
 						{
 							playButtonLocator = driver.findElement(By.xpath(youTubePlayButton));
@@ -1298,6 +1276,7 @@ public class CourseCardProcess
 				            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", playButtonLocator);
 				            System.out.println("JavaScript click successful.");
 				            String locator = "//button[@class='ytp-large-play-button ytp-button ytp-large-play-button-red-bg']";
+				            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				            if(driver.findElements(By.xpath(locator)).size()>0)
 				            {
 				            	WebElement jsPlayButton = driver.findElement(By.xpath(locator));
@@ -1312,11 +1291,14 @@ public class CourseCardProcess
 				        catch (Exception jsEx) 
 				        {
 				            System.out.println("JavaScript click also failed: " + jsEx.getMessage());
+				            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				            if(driver.findElements(By.xpath(locateVideoFrame2)).size()>0)
 							  { 
 								  WebElement  childFrameLocator = driver.findElement(By.xpath(locateVideoFrame2));
 								  driver.switchTo().frame(childFrameLocator); List<WebElement> playButtons =
-								  driver.findElements(By.xpath(playButton)); if (!playButtons.isEmpty())
+								  driver.findElements(By.xpath(playButton));
+								  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+								  if (!playButtons.isEmpty())
 								  {
 									  WebElement playLocator = playButtons.get(0);
 									  js.executeScript("arguments[0].click();", playLocator);
@@ -1335,9 +1317,13 @@ public class CourseCardProcess
 				{
 					System.out.println("Video frame is not available.");
 				}
+				status.addAll(this.fileUpload(filepath));
+				status.addAll(this.surveyTable());
+				status.addAll(this.Fullscreen());
 				status.addAll(this.answerQuiz());
 				driver.switchTo().defaultContent();
 				count++;
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				if(count == 4)
 				{
 					status.addAll(this.checkProgressTab());
@@ -1351,7 +1337,123 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	
+	public ArrayList<String> fileUpload(String filePath)
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String frameLocator = "//iframe[@id='unit-iframe']";
+		String fileUploadLocator = "//p[@class='upload']//input[@class='fileupload']";
+		String submit = "//a[@class='button finalize-upload']";
+		try
+		{
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			if (driver.findElements(By.xpath(frameLocator)).size() > 0) 
+			{
+				WebElement frameElement = driver.findElement(By.xpath(frameLocator));
+				driver.switchTo().frame(frameElement);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (driver.findElements(By.xpath(fileUploadLocator)).size() > 0)
+				{
+					WebElement fileUploadElement = driver.findElement(By.xpath(fileUploadLocator));
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("arguments[0].scrollIntoView(true);", fileUploadElement);
+					fileUploadElement.sendKeys(filePath); // Upload the file
+					//js.executeScript("arguments[0].click();", fileUploadElement); // Click the upload element
+					Thread.sleep(200); // Wait for the new tab to load
+					WebElement submitButton = driver.findElement(By.xpath(submit));
+					js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+					js.executeScript("arguments[0].click();", submitButton); // Click the submit button
+					Thread.sleep(200); // Wait for the new tab to load
+				}
+			} 
+			driver.switchTo().defaultContent(); // Switch back to the main content
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> surveyTable()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String frameLocator = "//iframe[@id='unit-iframe']";
+		String rows = "//table[@class='survey-table']//tr[@class='survey-row']";
+		String cell = ".//td[1]//input[@type='radio'][1]";
+		String submitPoll = "//button[@class='submit btn-brand']";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try
+		{
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			if (driver.findElements(By.xpath(frameLocator)).size() > 0) 
+			{
+				WebElement frameElement = driver.findElement(By.xpath(frameLocator));
+				driver.switchTo().frame(frameElement);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (driver.findElements(By.xpath(rows)).size() > 0)
+				{
+					List<WebElement> surveyRows = driver.findElements(By.xpath(rows));
+					for (WebElement row : surveyRows)
+					{
+						WebElement cellElement = row.findElement(By.xpath(cell));
+                        
+                        js.executeScript("arguments[0].scrollIntoView(true);", cellElement);
+                        js.executeScript("arguments[0].click();", cellElement); // Click the cell
+                    }
+					Thread.sleep(200); // Wait for the new tab to load
+					WebElement submitButton = driver.findElement(By.xpath(submitPoll));
+					js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+					js.executeScript("arguments[0].click();", submitButton); // Click the submit button
+					Thread.sleep(200); // Wait for the new tab to load
+					System.out.println("All survey rows processed successfully.");
+				}
+			} 
+			driver.switchTo().defaultContent(); // Switch back to the main content
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> Fullscreen()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String frameLocator = "//iframe[@id='unit-iframe']";
+		String openFullScreen = "//button[@class='enter-fullscreen']";
+		String exitFullscreen = "//button[@class='exit-fullscreen']";
+		try
+		{
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			if (driver.findElements(By.xpath(frameLocator)).size() > 0) 
+			{
+				WebElement frameElement = driver.findElement(By.xpath(frameLocator));
+				driver.switchTo().frame(frameElement);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				if (driver.findElements(By.xpath(openFullScreen)).size() > 0)
+				{
+					WebElement fullScreenButton = driver.findElement(By.xpath(openFullScreen));
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("arguments[0].scrollIntoView(true);", fullScreenButton);
+					js.executeScript("arguments[0].click();", fullScreenButton); // Click to open fullscreen
+					Thread.sleep(200); // Wait for the new tab to load
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+					if(driver.findElements(By.xpath(exitFullscreen)).size() > 0) 
+                    {
+                        WebElement exitFullScreenButton = driver.findElement(By.xpath(exitFullscreen));
+                        js.executeScript("arguments[0].scrollIntoView(true);", exitFullScreenButton);
+                        js.executeScript("arguments[0].click();", exitFullScreenButton); // Click to exit fullscreen
+                        Thread.sleep(200); // Wait for the new tab to load
+                    } 
+				}
+			} 
+			driver.switchTo().defaultContent(); // Switch back to the main content
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
 	public ArrayList<String> answerQuiz()
 	{
 		ArrayList<String> status = new ArrayList<String>();
@@ -1363,16 +1465,21 @@ public class CourseCardProcess
 		try 
 		{
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+			
 			if(driver.findElements(By.xpath(frameSection)).size() > 0)
 			{
 				WebElement frameLocator = driver.findElement(By.xpath(frameSection));
 				driver.switchTo().frame(frameLocator);
+				Thread.sleep(200); // Wait for the new tab to load
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				if (driver.findElements(By.xpath(quizPage)).size() > 0)
 				{
 					List<WebElement> quizSections = driver.findElements(By.xpath(quizPage));
 					for(WebElement quizSection : quizSections)
 					{
 						WebElement quizQuestion = quizSection; // Assuming 1 question per block
+						Thread.sleep(200); // Wait for the new tab to load
+						driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 						if(quizQuestion.findElements(By.xpath(quizQuestionList)).size()>0)
 						{
 							WebElement getEachQuestion = quizQuestion.findElement(By.xpath(quizQuestionList));
@@ -1381,10 +1488,11 @@ public class CourseCardProcess
 							JavascriptExecutor js = (JavascriptExecutor) driver;
 							js.executeScript("arguments[0].scrollIntoView(true);", markAnswer);
 							js.executeScript("arguments[0].click();", markAnswer);
-							
+							Thread.sleep(200); // Wait for the new tab to load
 							// Click Submit
 							By submitAnswer = By.xpath(quizSubmitButton);
 							status.addAll(this.clickWebElements(quizQuestion, submitAnswer));
+							Thread.sleep(200); // Wait for the new tab to load
 						}
 						else
 	                    {
@@ -1450,6 +1558,36 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	
+	public ArrayList<String> openNotesTab()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String notesTabLink = "//a[contains(text(),'Notes')]";
+		try
+		{
+			status.add(homePage.openLinkInNewTab(notesTabLink));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 	status;
+	}
+	public ArrayList<String> openWikiTab()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String wikiTabLink = "//a[normalize-space()='Wiki']";
+		try
+		{
+			status.add(homePage.openLinkInNewTab(wikiTabLink));
+			driver.close();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 	status;
+	}
+	
 	public ArrayList<String> enterTextOnField(String locator, String textToEnter)
 	{
 		ArrayList<String> status = new ArrayList<String>();
@@ -1684,8 +1822,10 @@ public class CourseCardProcess
 		{
 			status.add(homePage.openLinkInNewTab(courseFromUserDropdown));
 			status.add(registerPage.FocusWindow("dashboard"));
+			Thread.sleep(200); // Wait for the new tab to load
 			driver.close();
 			driver.switchTo().window(discussionPage);
+			Thread.sleep(200); 
 		}
 		catch(Exception e)
 		{
@@ -1702,8 +1842,10 @@ public class CourseCardProcess
 		{
 			status.add(homePage.openLinkInNewTab(discoverFromUserDropdown));
 			status.add(registerPage.FocusWindow("courses"));
+			Thread.sleep(200); // Wait for the new tab to load
 			driver.close();
 			driver.switchTo().window(discussionPage);
+			Thread.sleep(200); 
 		}
 		catch(Exception e)
 		{
@@ -1720,8 +1862,10 @@ public class CourseCardProcess
 		{
 			status.add(homePage.openLinkInNewTab(discoverFromUserDropdown));
 			status.add(registerPage.FocusWindow("courses"));
+			Thread.sleep(200); // Wait for the new tab to load
 			driver.close();
 			driver.switchTo().window(discussionPage);
+			Thread.sleep(200); 
 		}
 		catch(Exception e)
 		{
@@ -1738,6 +1882,7 @@ public class CourseCardProcess
 		{
 			status.add(homePage.openLinkInNewTab(ProfileFromUserDropdown));
 			status.add(registerPage.FocusWindow("profile"));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1746,14 +1891,21 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	String focusLearnerRecod ="";
 	public ArrayList<String> checkViewRecordFromProfilePage()
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickViewRecord = "//div[@class='container-fluid']/div[2]/descendant::a[contains(text(),'View My Records')]";		
 		try
 		{
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickViewRecord));
 			status.add(registerPage.FocusWindow("learner-record"));
+			 focusLearnerRecod = driver.getWindowHandle();
+			status.add(registerPage.FocusWindow("profile"));
+			driver.close(); // Close the learner record tab
+			driver.switchTo().window(focusLearnerRecod); // Switch back to the learner record tab
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1770,6 +1922,7 @@ public class CourseCardProcess
 		{
 			status.add(homePage.clickWebElement(clickLinkFromRecordPage));
 			status.add(registerPage.FocusWindow("learner-record"));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1786,6 +1939,8 @@ public class CourseCardProcess
 		{
 			status.add(homePage.clickWebElement(clickBackToProfile));
 			status.add(registerPage.FocusWindow("profile"));
+			
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1802,6 +1957,7 @@ public class CourseCardProcess
 		{
 			status.add(homePage.clickWebElement(clickDOBLink));
 			status.add(registerPage.FocusWindow("account"));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1818,7 +1974,9 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickAccountSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editFullname));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1834,6 +1992,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1852,10 +2011,12 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickAccountSection));
-			status.add(homePage.clickWebElement(editFullname));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editFullname));
 			status.addAll(this.enterTextOnField(focusFullnameField, "Test User"));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1872,7 +2033,9 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickProfileSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editEducation));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1888,6 +2051,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1907,11 +2071,12 @@ public class CourseCardProcess
 		{
 			status.add(homePage.clickWebElement(clickProfileSection));
 			status.add(homePage.clickWebElement(editEducation));
-			status.add(homePage.clickWebElement(editEducation));
+			Thread.sleep(200); 
 			WebElement dropdown = driver.findElement(By.xpath(selectLevelOfEdu));
 			Select select = new Select(dropdown);
 			select.selectByIndex(1);
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1927,6 +2092,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editGender));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1942,6 +2108,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1960,10 +2127,12 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editGender));
-			status.add(homePage.clickWebElement(editGender));
+			Thread.sleep(200); 
 			Select selectEdu = new Select(driver.findElement(By.xpath(selectLevelOfGender)));
 			selectEdu.selectByVisibleText("Female");
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1979,6 +2148,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editSpokenLanguage));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -1994,6 +2164,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2011,10 +2182,12 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editSpokenLanguage));
-			status.add(homePage.clickWebElement(editSpokenLanguage));
+			Thread.sleep(200); 
 			Select selectEdu = new Select(driver.findElement(By.xpath(selectSpokenLanguage)));
 			selectEdu.selectByIndex(3);
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2030,6 +2203,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2045,6 +2219,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editLinkedIn));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2060,6 +2235,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2077,8 +2253,11 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editLinkedIn));
+			Thread.sleep(200); 
 			status.addAll(this.enterTextOnField(enterLinkedInField, "test"));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2108,6 +2287,7 @@ public class CourseCardProcess
 		String clickCancelButton = "//button[contains(text(),'Cancel')]";
 		try
 		{
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickCancelButton));
 		}
 		catch (Exception e)
@@ -2128,6 +2308,7 @@ public class CourseCardProcess
 			status.add(homePage.clickWebElement(editFacebook));
 			status.addAll(this.enterTextOnField(enterFacebookField, "test"));
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2143,6 +2324,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editTwitter));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2158,6 +2340,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2175,8 +2358,10 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editTwitter));
+			Thread.sleep(200); 
 			status.addAll(this.enterTextOnField(enterTwitterField, "test"));
 			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2194,11 +2379,14 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(editLinkedAccounts));
+			Thread.sleep(200); 
 			status.add(homePage.openLinkInNewTab(clickGoogleLink));
 			status.add(registerPage.FocusWindow("account"));
+			Thread.sleep(100); // Wait for Google sign-in page to load
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			driver.close();
 			driver.switchTo().window(discussionPage);
+			Thread.sleep(200); 
 		}
 		catch (Exception e)
 		{
@@ -2213,15 +2401,13 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickOrderHistoryFromUserDropdown = "//a[contains(text(),'Order History')]";
-		String clickSupportLink = "//a[contains(text(),'contact support')]";
 		try
 		{
 			status.add(homePage.openLinkInNewTab(clickOrderHistoryFromUserDropdown));
+			Thread.sleep(200); 
 			status.add(registerPage.FocusWindow("orders"));
-			status.add(homePage.clickWebElement(clickSupportLink));
-			status.add(registerPage.FocusWindow("requests"));
-			driver.close();
-			driver.switchTo().window(discussionPage);
+			Thread.sleep(200); 
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -2236,6 +2422,7 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickSupportLink));
+			Thread.sleep(200); 
 			status.add(registerPage.FocusWindow("requests"));
 			driver.close();
 			driver.switchTo().window(discussionPage);

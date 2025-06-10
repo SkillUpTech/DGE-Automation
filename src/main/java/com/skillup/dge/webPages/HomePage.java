@@ -505,6 +505,7 @@ public class HomePage
 		try 
 		{
 			status.addAll(signInPage.signInProcess(data));
+			Thread.sleep(200);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 			System.out.println("sign in done");
 		} catch (Exception e) {
@@ -518,7 +519,9 @@ public class HomePage
 		ArrayList<String> status = new ArrayList<String>();
 		try 
 		{
+			Thread.sleep(200);
 			status.add(registerPage.FocusWindow("learner-dashboard"));
+			Thread.sleep(200);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 			System.out.println("Dashboard URL verified");
 		} 
@@ -556,7 +559,7 @@ public class HomePage
 		String FindCourseLocator = "//a[contains(text(),'Find a course ')]";
 		String logoFromExploreCourses = "//img[@alt='SkillUp Home Page']";
 		try {
-			
+			Thread.sleep(200);
 			System.out.println("Find course link validation started");
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 			status.add(this.clickWebElement(FindCourseLocator));
@@ -595,7 +598,7 @@ public class HomePage
 		String closeAlert = "//span[@class='fa fa-times']";
 		try {
 			//status.add(this.clickWebElement(exploreButtonLocator));
-			
+			Thread.sleep(200);
 			status.add(this.clickWebElement(searchTextField));
 			WebElement searchText = driver.findElement(By.xpath(searchTextField));
 			searchText.sendKeys(data);

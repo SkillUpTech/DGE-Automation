@@ -45,8 +45,11 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkSignInProcess":
 			 		checkSignInProcess(row);
 			        break;
-			 	case "CourseCardSelection_EnrollCard":
-			 		CourseCardSelection_EnrollCard(row);
+			 	case "checkFindCourseLink":
+			 		checkFindCourseLink();
+			        break;
+			 	case "checkCardSelection":
+			 		checkCardSelection(row);
 			        break;
 			 	case "checkTitleFromCourseAboutPage":
 			 		checkTitleFromCourseAboutPage();
@@ -69,20 +72,41 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkEnrollButton":
 			 		checkEnrollButton();
 			        break;
-			 	case "checkUnEnrollOption":
-			 		checkUnEnrollOption();
-			        break;
-			 	case "checkUnEnrollProcess":
-			 		checkUnEnrollProcess();
-			        break;
-			 	case "checkEmailSettingProcess":
-			 		checkEmailSettingProcess();
+			 	case "CardSettingsOptions":
+			 		CardSettingsOptions();
 			        break;
 			 	case "checkEmailSettingsOption":
 			 		checkEmailSettingsOption();
 			        break;
-			 	case "selectCourseToComplete":
-			 		checkEnrollCardToCompleteCourse(row);
+			 	case "checkEmailNevermindOption":
+			 		checkEmailNevermindOption();
+			        break;
+			 	case "checkMailsOnOffSubmission":
+			 		checkMailsOnOffSubmission();
+			        break;
+			 	case "checkSettingsLinkToUnEnrollCard":
+			 		checkSettingsLinkToUnEnrollCard();
+			        break;
+			 	case "checkUnenrollOption":
+			 		checkUnenrollOption();
+			        break;
+			 	case "checkUnEnrollNeverMindButton":
+			 		checkUnEnrollNeverMindButton();
+			        break;
+			 	case "checkSkipSurveyFromUnenrollOption":
+			 		checkSkipSurveyFromUnenrollOption();
+			        break;
+			 	case "checkReturnToDasboardButton":
+			 		checkReturnToDasboardButton();
+			        break;
+			 	case "checkSelectCourseToUnEnroll":
+			 		checkSelectCourseToUnEnroll(row);
+			        break;
+			 	case "checkReasonToUnenroll":
+			 		checkReasonToUnenroll();
+			        break;
+			 	case "selectCourseCardToComplete":
+			 		selectCourseCardToComplete(row);
 			        break;
 			 	case "checkCourseCardTitleWithSummaryPage":
 			 		checkCourseCardTitleWithSummaryPage();
@@ -99,47 +123,223 @@ public class CourseCardProcessTest implements Callable<String>
 			        break;
 			 	case "checkCourseCardOrgWithDashboard":
 			 		checkCourseCardOrgWithDashboard();
+			 		break;
+			 	case "checkCourseCardDateWithDashboard":
+			 		checkCourseCardDateWithDashboard();
 			        break;
-				/*
-				 * case "checkCourseCardDateWithDashboard": checkCourseCardDateWithDashboard();
-				 * break;
-				 */
+			 	case "checkBeginCourseCard":
+			 		checkBeginCourseCard();
+			        break;
 			 	case "checkExpandAllProcess":
 			 		checkExpandAllProcess();
 			        break;
 			 	case "checkCollapseAll":
 			 		checkCollapseAll();
 			        break;
-			 	case "checkBookMarksLink":
-			 		checkBookMarksLink();
+			 	case "checkStartCourseButton":
+			 		checkStartCourseButton();
+			        break;
+			 	case "checkBookMarksPage":
+			 		checkBookMarksPage();
+			        break;
+			 	case "checkPageISBookMarkedOrNot":
+			 		checkPageISBookMarkedOrNot();
+			        break;
+			 	case "checkPageIsNavigatoToCourse":
+			 		checkPageIsNavigatoToCourse();
+			        break;
+			 	case "checkPageIsBookmarkedOrNot":
+			 		checkPageISBookMarkedOrNot();
+			        break;
+			 	case "checkViewButtonFromBookmarkPage":
+			 		checkViewButtonFromBookmarkPage();
+			        break;
+			 	case "checkCourseOutlineTrayIcon":
+			 		checkCourseOutlineTrayIcon();
+			        break;
+			 	case "checkDiscussionIcon":
+			 		checkDiscussionIcon();
+			        break;
+			 	case "checkDiscussionFrame":
+			 		checkDiscussionFrame();
+			        break;
+			 	case "checkDiscussionTitle":
+			 		checkDiscussionTitle();
+			        break;
+			 	case "checkDiscussionSectionCloseIcon":
+			 		checkDiscussionSectionCloseIcon();
+			        break;
+			 	case "checkBellIcon":
+			 		checkBellIcon();
+			        break;
+			 	case "checkNotificationTray":
+			 		checkNotificationTray();
+			        break;
+			 	case "checkNavigateToCourseHomePage":
+			 		checkNavigateToCourseHomePage();
 			        break;
 			 	case "checkLaunchTourLink":
+			 		checkLaunchTourLink();
+			        break;
+			 	case "checkLaunchTourAlert":
+			 		checkLaunchTourAlert();
+			        break;
+			 	case "checkDismissFromLaunchTourAlert":
+			 		checkDismissFromLaunchTourAlert();
+			        break;
+			 	case "checkOkayFromLaunchTourAlert":
+			 		checkOkayFromLaunchTourAlert();
+			        break;
+			 	case "checkNextFromLaunchTourAlert":
+			 		checkNextFromLaunchTourAlert();
+			        break;
+			 	case "checkViewAllCourseLink":
 			 		checkViewAllCourseLink();
 			        break;
-			 	case "checkStartCourse":
-			 		checkStartCourse();
+			 	case "startCourse":
+			 		startCourse(row.get(1));
 			        break;
 			 	case "checkProgressTab":
 			 		checkProgressTab();
 			        break;
-			 	case "checkDiscussionTab":
-			 		checkDiscussionTab();
+			 	case "checkDiscussionTabFromHomePage":
+			 		checkDiscussionTabFromHomePage();
 			        break;
-			 	case "checkOptionsFromUserDropdown":
-			 		checkOptionsFromUserDropdown();
+			 	case "checkAddPostButtonFromDiscussionHomePage":
+			 		checkAddPostButtonFromDiscussionHomePage();
 			        break;
-			 	case "checkProfilePage":
-			 		checkProfilePage();
+			 	case "checkAddPostFromDisplayedFromDiscussionPage":
+			 		checkAddPostFromDisplayedFromDiscussionPage();
 			        break;
-			 	case "checkAccountPage":
-			 		checkAccountPage();
-			 		break;
+			 	case "checkCancelFromDiscussionPage":
+			 		checkCancelFromDiscussionPage();
+			        break;
+			 	case "checkSelectTopicAreaFromDiscussionPage":
+			 		checkSelectTopicAreaFromDiscussionPage();
+			        break;
+			 	case "checkPostFieldFromDiscussionPage":
+			 		checkPostFieldFromDiscussionPage();
+			        break;
+			 	case "checkParagraphFromDiscussionPage":
+			 		checkParagraphFromDiscussionPage();
+			        break;
+			 	case "checkSubmitButtonDiscussionFromPage":
+			 		checkSubmitButtonDiscussionFromPage();
+			        break;
+			 	case "checkRecentActivityFromDiscussionPage":
+			 		checkRecentActivityFromDiscussionPage();
+			        break;
+			 	case "checkAllPostsFromDiscussionPage":
+			 		checkAllPostsFromDiscussionPage();
+			        break;
+			 	case "checkTopicsFromDiscussionPage":
+			 		checkTopicsFromDiscussionPage();
+			        break;
+			 	case "checkLearnersFromDiscussionPage":
+			 		checkLearnersFromDiscussionPage();
+			        break;
+			 	case "checkAbleToOpenUserDropdown":
+			 		checkAbleToOpenUserDropdown();
+			        break;
+			 	case "checkCoursesOptionFromDropdown":
+			 		checkCoursesOptionFromDropdown();
+			        break;
+			 	case "checkDiscoverOptionFromDropdown":
+			 		checkDiscoverOptionFromDropdown();
+			        break;
+			 	case "checkDashboardOptionFromDropdown":
+			 		checkDashboardOptionFromDropdown();
+			        break;
+			 	case "checkProfileOptionsFromUserDropdown":
+			 		checkProfileOptionsFromUserDropdown();
+			        break;
+			 	case "checkViewRecordFromProfilePage":
+			 		checkViewRecordFromProfilePage();
+			        break;
+			 	case "checkLinkFromRecordPage":
+			 		checkLinkFromRecordPage();
+			        break;
+			 	case "checkBackToProfileIcon":
+			 		checkBackToProfileIcon();
+			        break;
+			 	case "checkDOBLink":
+			 		checkDOBLink();
+			        break;
+			 	case "checkEditFullnameFromAccountInformation":
+			 		checkEditFullnameFromAccountInformation();
+			        break;
+			 	case "checkCancelFromEditFullnameInAccountInformation":
+			 		checkCancelFromEditFullnameInAccountInformation();
+			        break;
+			 	case "checkSaveFromEditFullnameInAccountInformation":
+			 		checkSaveFromEditFullnameInAccountInformation();
+			        break;
+			 	case "checkEducationFromProfileInformation":
+			 		checkEducationFromProfileInformation();
+			        break;
+			 	case "checkEducationToCancelFromProfileInformation":
+			 		checkEducationToCancelFromProfileInformation();
+			        break;
+			 	case "checkEducationToSaveFromProfileInformation":
+			 		checkEducationToSaveFromProfileInformation();
+			        break;
+			 	case "checkGenderFromProfileInformation":
+			 		checkGenderFromProfileInformation();
+			        break;
+			 	case "checkGenderToCancelFromProfileInformation":
+			 		checkGenderToCancelFromProfileInformation();
+			        break;
+			 	case "checkGenderToSaveFromProfileInformation":
+			 		checkGenderToSaveFromProfileInformation();
+			        break;
+			 	case "checkSpokenlanguageFromProfileInformation":
+			 		checkSpokenlanguageFromProfileInformation();
+			        break;
+			 	case "checkCancelInSpokenlanguageFromProfileInformation":
+			 		checkCancelInSpokenlanguageFromProfileInformation();
+			        break;
+			 	case "checkSaveInSpokenlanguageFromProfileInformation":
+			 		checkSaveInSpokenlanguageFromProfileInformation();
+			        break;
+			 	case "checkSocialMediaLinks":
+			 		checkSocialMediaLinks();
+			        break;
+			 	case "checkLinkedInFromSocialMediaLinks":
+			 		checkLinkedInFromSocialMediaLinks();
+			        break;
+			 	case "checkLinkedInToCancelFromSocialMediaLinks":
+			 		checkLinkedInToCancelFromSocialMediaLinks();
+			        break;
+			 	case "checkLinkedInToSaveFromSocialMediaLinks":
+			 		checkLinkedInToSaveFromSocialMediaLinks();
+			        break;
+			 	case "checkFacebookFromSocialMediaLinks":
+			 		checkFacebookFromSocialMediaLinks();
+			        break;
+			 	case "checkFacebookToCancelFromSocialMediaLinks":
+			 		checkFacebookToCancelFromSocialMediaLinks();
+			        break;
+			 	case "checkFacebookToSaveFromSocialMediaLinks":
+			 		checkFacebookToSaveFromSocialMediaLinks();
+			        break;
+			 	case "checkTwitterFromSocialMediaLinks":
+			 		checkTwitterFromSocialMediaLinks();
+			        break;
+			 	case "checkTwitterToCancelFromSocialMediaLinks":
+			 		checkTwitterToCancelFromSocialMediaLinks();
+			        break;
+			 	case "checkTwitterToSaveFromSocialMediaLinks":
+			 		checkTwitterToSaveFromSocialMediaLinks();
+			        break;
+			 	case "checkLinkedAccounts":
+			 		checkLinkedAccounts();
+			        break;
 			 	case "checkOrderHistory":
 			 		checkOrderHistory();
 			        break;
-				/*
-				 * case "checkDeleteAccount": checkDeleteAccount(); break;
-				 */
+			 	case "checkSupportLinkFromOrderHistory":
+			 		checkSupportLinkFromOrderHistory();
+			        break;
 				}
 			}
 		 
@@ -204,7 +404,7 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = homePage.checkHomePageURL(data);
-			updateExcelData(status, 2);
+			updateExcelData(status, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -213,16 +413,25 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = homePage.checkSignInProcess(data);
-			updateExcelData(status, 3);
+			updateExcelData(status, 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void CourseCardSelection_EnrollCard(ArrayList<String> data) {
+	public void checkFindCourseLink() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.CourseCardSelection_EnrollCard(data);
+			ArrayList<String> status = courseCardProcess.checkFindCourseLink();
+			updateExcelData(status, 3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkCardSelection(ArrayList<String> data) {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkEnrollCardToCompleteCourse(data);
 			updateExcelData(status, 4);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -291,20 +500,11 @@ public class CourseCardProcessTest implements Callable<String>
 			e.printStackTrace();
 		}
 	}
-	public void checkUnEnrollOption() {
+	public void CardSettingsOptions() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkUnEnrollOption();
-			updateExcelData(status, 13);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkUnEnrollProcess() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkUnEnrollProcess();
-			updateExcelData(status, 14);
+			ArrayList<String> status = courseCardProcess.CardSettingsOptions();
+			updateExcelData(status, 12);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -313,25 +513,97 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = courseCardProcess.checkEmailSettingsOption();
+			updateExcelData(status, 13);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkEmailNevermindOption() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkEmailNevermindOption();
+			updateExcelData(status, 14);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkMailsOnOffSubmission() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkMailsOnOffSubmission();
 			updateExcelData(status, 15);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void checkEmailSettingProcess() {
+	public void checkSettingsLinkToUnEnrollCard() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEmailSettingProcess();
+			ArrayList<String> status = courseCardProcess.checkSettingsLinkToUnEnrollCard();
 			updateExcelData(status, 16);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void checkEnrollCardToCompleteCourse(ArrayList<String> data) {
+	public void checkUnenrollOption() {
 		try {
 
-			ArrayList<String> status = courseCardProcess.checkEnrollCardToCompleteCourse(data);
+			ArrayList<String> status = courseCardProcess.checkUnenrollOption();
+			updateExcelData(status, 17);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkUnEnrollNeverMindButton() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkUnEnrollNeverMindButton();
 			updateExcelData(status, 18);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkSkipSurveyFromUnenrollOption() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkSkipSurveyFromUnenrollOption();
+			updateExcelData(status, 19);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkReturnToDasboardButton() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkReturnToDasboardButton();
+			updateExcelData(status, 20);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkSelectCourseToUnEnroll(ArrayList<String> data) {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkSelectCourseToUnEnroll(data);
+			updateExcelData(status, 21);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkReasonToUnenroll() {
+		try {
+
+			ArrayList<String> status = courseCardProcess.checkReasonToUnenroll();
+			updateExcelData(status, 22);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void selectCourseCardToComplete(ArrayList<String> data) {
+		try {
+
+			ArrayList<String> status = courseCardProcess.selectCourseCardToComplete(data);
+			updateExcelData(status, 23);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -340,7 +612,7 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = courseCardProcess.checkCourseCardTitleWithSummaryPage();
-			updateExcelData(status, 19);
+			updateExcelData(status, 24);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -349,7 +621,7 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = courseCardProcess.checkCourseCardOrgWithSummaryPage();
-			updateExcelData(status, 20);
+			updateExcelData(status, 25);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -358,7 +630,7 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = courseCardProcess.checkCourseCardDateWithSummaryPage();
-			updateExcelData(status, 21);
+			updateExcelData(status, 26);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -367,159 +639,645 @@ public class CourseCardProcessTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = courseCardProcess.checkCourseCardTitleWithDashboard();
-			updateExcelData(status, 22);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkCourseCardOrgWithDashboard() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkCourseCardOrgWithDashboard();
-			updateExcelData(status, 23);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkCourseCardDateWithDashboard() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkCourseCardDateWithDashboard();
-			updateExcelData(status, 24);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkExpandAllProcess() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkExpandAllProcess();
-			updateExcelData(status, 25);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkCollapseAll() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkCollapseAll();
-			updateExcelData(status, 26);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkBookMarksLink() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkBookMarksLink();
 			updateExcelData(status, 27);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void checkLaunchTourLink() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkLaunchTourLink();
-			updateExcelData(status, 28);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkViewAllCourseLink() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkViewAllCourseLink();
-			updateExcelData(status, 29);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void checkStartCourse() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.startCourse();
-			updateExcelData(status, 30);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	  public void checkProgressTab() 
+	  public void checkCourseCardOrgWithDashboard() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkProgressTab(); updateExcelData(status, 31);
+			  ArrayList<String> status =  courseCardProcess.checkCourseCardOrgWithDashboard(); updateExcelData(status, 28);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkDiscussionTab() 
+	  public void checkCourseCardDateWithDashboard() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkDiscussionTab(); updateExcelData(status, 32);
+			  ArrayList<String> status =  courseCardProcess.checkCourseCardDateWithDashboard(); updateExcelData(status, 29);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkOptionsFromUserDropdown() 
+	  public void checkBeginCourseCard() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkOptionsFromUserDropdown(); updateExcelData(status, 33);
+			  ArrayList<String> status =  courseCardProcess.checkBeginCourseCard(); updateExcelData(status, 30);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkProfilePage() 
+	  public void checkExpandAllProcess() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkProfilePage(); updateExcelData(status, 34);
+			  ArrayList<String> status =  courseCardProcess.checkExpandAll(); updateExcelData(status, 31);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkAccountPage() 
+	  public void checkCollapseAll() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkAccountPage(); updateExcelData(status, 35);
+			  ArrayList<String> status =  courseCardProcess.checkCollapseAll(); updateExcelData(status, 32);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkOrderHistory() 
+	  public void checkStartCourseButton() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkOrderHistory(); updateExcelData(status, 36);
+			  ArrayList<String> status =  courseCardProcess.checkStartCourseButton(); updateExcelData(status, 33);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkDeleteAccount() 
+	  public void checkBookMarksPage() 
 	  { 
 		  try 
 		  {
-			  ArrayList<String> status =  courseCardProcess.checkDeleteAccount(); updateExcelData(status, 37);
+			  ArrayList<String> status =  courseCardProcess.checkBookMarksPage(); updateExcelData(status, 34);
 		  } 
 		  catch (Exception e)
 		  { 
 			  e.printStackTrace(); 
 		  }
 	  }
+	  public void checkPageISBookMarkedOrNot() 
+	  { 
+		  try 
+		  {
+			  ArrayList<String> status =  courseCardProcess.checkPageISBookMarkedOrNot(); updateExcelData(status, 35);
+		  } 
+		  catch (Exception e)
+		  { 
+			  e.printStackTrace(); 
+		  }
+	  }
+	  public void checkPageIsNavigatoToCourse() 
+	  { 
+		  try 
+		  {
+			  ArrayList<String> status =  courseCardProcess.checkPageIsNavigatoToCourse(); updateExcelData(status, 36);
+		  } 
+		  catch (Exception e)
+		  { 
+			  e.printStackTrace(); 
+		  }
+	  }
+	  public void checkBookmarksLinkFromHome() 
+	  { 
+		  try 
+		  {
+			  ArrayList<String> status =  courseCardProcess.checkBookmarksLinkFromHome(); updateExcelData(status, 37);
+		  } 
+		  catch (Exception e)
+		  { 
+			  e.printStackTrace(); 
+		  }
+	  }
+
+		public void checkViewButtonFromBookmarkPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkViewButtonFromBookmarkPage();
+		        updateExcelData(status, 38);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkCourseOutlineTrayIcon() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkCourseOutlineTrayIcon();
+		        updateExcelData(status, 39);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDiscussionIcon() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscussionIcon();
+		        updateExcelData(status, 40);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDiscussionFrame() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscussionFrame();
+		        updateExcelData(status, 41);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDiscussionTitle() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscussionTitle();
+		        updateExcelData(status, 42);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDiscussionSectionCloseIcon() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscussionSectionCloseIcon();
+		        updateExcelData(status, 43);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkBellIcon() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkBellIcon();
+		        updateExcelData(status, 44);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkNotificationTray() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkNotificationTray();
+		        updateExcelData(status, 45);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkNavigateToCourseHomePage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkNavigateToCourseHomePage();
+		        updateExcelData(status, 46);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkLaunchTourLink() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLaunchTourLink();
+		        updateExcelData(status, 47);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkLaunchTourAlert() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLaunchTourAlert();
+		        updateExcelData(status, 48);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDismissFromLaunchTourAlert() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDismissFromLaunchTourAlert();
+		        updateExcelData(status, 49);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkOkayFromLaunchTourAlert() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkOkayFromLaunchTourAlert();
+		        updateExcelData(status, 50);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkNextFromLaunchTourAlert() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkNextFromLaunchTourAlert();
+		        updateExcelData(status, 51);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkViewAllCourseLink() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkViewAllCourseLink();
+		        updateExcelData(status, 52);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void startCourse(String filepath) {
+		    try {
+		        ArrayList<String> status = courseCardProcess.startCourse(filepath);
+		        updateExcelData(status, 53);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkProgressTab() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkProgressTab();
+		        updateExcelData(status, 54);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		public void checkDiscussionTabFromHomePage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscussionTabFromHomePage();
+		        updateExcelData(status, 55);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkAddPostButtonFromDiscussionHomePage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkAddPostButtonFromDiscussionHomePage();
+		        updateExcelData(status, 56);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkAddPostFromDisplayedFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkAddPostFromDisplayedFromDiscussionPage();
+		        updateExcelData(status, 57);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkCancelFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkCancelFromDiscussionPage();
+		        updateExcelData(status, 58);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSelectTopicAreaFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSelectTopicAreaFromDiscussionPage();
+		        updateExcelData(status, 59);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkPostFieldFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkPostFieldFromDiscussionPage();
+		        updateExcelData(status, 60);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkParagraphFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkParagraphFromDiscussionPage();
+		        updateExcelData(status, 61);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSubmitButtonDiscussionFromPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSubmitButtonDiscussionFromPage();
+		        updateExcelData(status, 62);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkRecentActivityFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkRecentActivityFromDiscussionPage();
+		        updateExcelData(status, 63);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkAllPostsFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkAllPostsFromDiscussionPage();
+		        updateExcelData(status, 64);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkTopicsFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkTopicsFromDiscussionPage();
+		        updateExcelData(status, 65);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLearnersFromDiscussionPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLearnersFromDiscussionPage();
+		        updateExcelData(status, 66);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkAbleToOpenUserDropdown() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkAbleToOpenUserDropdown();
+		        updateExcelData(status, 67);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkCoursesOptionFromDropdown() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkCoursesOptionFromDropdown();
+		        updateExcelData(status, 68);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkDiscoverOptionFromDropdown() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDiscoverOptionFromDropdown();
+		        updateExcelData(status, 69);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkDashboardOptionFromDropdown() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDashboardOptionFromDropdown();
+		        updateExcelData(status, 70);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkProfileOptionsFromUserDropdown() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkProfileOptionsFromUserDropdown();
+		        updateExcelData(status, 71);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkViewRecordFromProfilePage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkViewRecordFromProfilePage();
+		        updateExcelData(status, 72);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLinkFromRecordPage() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLinkFromRecordPage();
+		        updateExcelData(status, 73);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkBackToProfileIcon() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkBackToProfileIcon();
+		        updateExcelData(status, 74);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkDOBLink() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkDOBLink();
+		        updateExcelData(status, 75);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEditFullnameFromAccountInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEditFullnameFromAccountInformation();
+		        updateExcelData(status, 76);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkCancelFromEditFullnameInAccountInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkcancelFromEditFullnameInAccountInformation();
+		        updateExcelData(status, 77);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSaveFromEditFullnameInAccountInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSaveFromEditFullnameInAccountInformation();
+		        updateExcelData(status, 78);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEducationFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEducationFromProfileInformation();
+		        updateExcelData(status, 79);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEducationToCancelFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEducationToCancelFromProfileInformation();
+		        updateExcelData(status, 80);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEducationToSaveFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEducationToSaveFromProfileInformation();
+		        updateExcelData(status, 81);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkGenderFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkGenderFromProfileInformation();
+		        updateExcelData(status, 82);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkGenderToCancelFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkGenderToCancelFromProfileInformation();
+		        updateExcelData(status, 83);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkGenderToSaveFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkGenderToSaveFromProfileInformation();
+		        updateExcelData(status, 84);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSpokenlanguageFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSpokenlanguageFromProfileInformation();
+		        updateExcelData(status, 85);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkCancelInSpokenlanguageFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkCancelInSpokenlanguageFromProfileInformation();
+		        updateExcelData(status, 86);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSaveInSpokenlanguageFromProfileInformation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSaveInSpokenlanguageFromProfileInformation();
+		        updateExcelData(status, 87);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSocialMediaLinks();
+		        updateExcelData(status, 88);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLinkedInFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLinkedInFromSocialMediaLinks();
+		        updateExcelData(status, 89);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLinkedInToCancelFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLinkedInToCancelFromSocialMediaLinks();
+		        updateExcelData(status, 90);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLinkedInToSaveFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLinkedInToSaveFromSocialMediaLinks();
+		        updateExcelData(status, 91);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkFacebookFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkFacebookFromSocialMediaLinks();
+		        updateExcelData(status, 92);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkFacebookToCancelFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkFacebookToCancelFromSocialMediaLinks();
+		        updateExcelData(status, 93);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkFacebookToSaveFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkFacebookToSaveFromSocialMediaLinks();
+		        updateExcelData(status, 94);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkTwitterFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkTwitterFromSocialMediaLinks();
+		        updateExcelData(status, 95);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkTwitterToCancelFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkTwitterToCancelFromSocialMediaLinks();
+		        updateExcelData(status, 96);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkTwitterToSaveFromSocialMediaLinks() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkTwitterToSaveFromSocialMediaLinks();
+		        updateExcelData(status, 97);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkLinkedAccounts() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkLinkedAccounts();
+		        updateExcelData(status, 98);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkOrderHistory() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkOrderHistory();
+		        updateExcelData(status, 99);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkSupportLinkFromOrderHistory() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSupportLinkFromOrderHistory();
+		        updateExcelData(status, 100);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		
+
 }
