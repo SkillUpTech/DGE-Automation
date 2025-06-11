@@ -362,7 +362,7 @@ public class CourseCardProcessTest implements Callable<String>
 				sheetStatus = "Fail"; // Set status to Fail if there are errors
 				Map<String, ArrayList<ArrayList<String>>> excelData = com.skillup.dge.testPages.RegressionTesting.EXCEL_DATA_AS_SHEEET_NAME_AND_ROWS_MAP;
 
-				List<ArrayList<String>> sheetData = excelData.get("CourseCard_AIF");
+				List<ArrayList<String>> sheetData = excelData.get("CourseCard");
 
 				while (sheetData.size() <= rowIndex) {
 					sheetData.add(new ArrayList<>()); // Add new rows if missing

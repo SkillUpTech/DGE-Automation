@@ -38,9 +38,9 @@ public class CourseCardProcess
 		String clickFindCourse = "//a[contains(text(),'Find a course ')]";
 		try
 		{
-			if (driver.findElements(By.xpath(clickFindCourse)).size() > 0) {
-			} else {
-			}
+			if (driver.findElements(By.xpath(clickFindCourse)).size() > 0) 
+			{
+			} 
 		}
 		catch (Exception e)
 		{
@@ -49,10 +49,6 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	
-	
-	
-	
 	
 	public String checkWebElementComparision(String locator, String data)
 	{
@@ -96,7 +92,9 @@ public class CourseCardProcess
 			if (data1.trim().equals(data2.trim()))
 			{
 				System.out.println("Element text matches: " );
-			} else {
+			} 
+			else
+			{
 				System.out.println("Element text does not match: ");
 				status = "Fail";
 			}
@@ -357,7 +355,9 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(unenrollButton));
+			Thread.sleep(200); // wait for the alert to appear
 			status.add(this.checkWebElementComparision(locateAlertText, checkAlertText));
+			Thread.sleep(200); 
 		}
 		catch (Exception e) 
 		{
@@ -374,6 +374,7 @@ public class CourseCardProcess
 		String locateAlertText = "//div[@class='bg-white p-3 rounded shadow']/h4";
 		try
 		{
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(neverButton));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if (driver.findElements(By.xpath(locateAlertText)).size() > 0)
