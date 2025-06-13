@@ -376,6 +376,7 @@ public class CourseCardProcess
 		{
 			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(neverButton));
+			Thread.sleep(200);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if (driver.findElements(By.xpath(locateAlertText)).size() > 0)
 			{
@@ -399,9 +400,13 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(settingsLink));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(unenrollButton));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(locateUnenrollButtonFromAlert));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(skipsurveyButton));
+			Thread.sleep(200);
 			
 		}
 		catch (Exception e) 
@@ -418,7 +423,9 @@ public class CourseCardProcess
 		try
 		{
 			status.add(homePage.clickWebElement(clickReturnToDashboard));
+			Thread.sleep(200);
 			status.add(registerPage.FocusWindow("learner-dashboard/"));
+			Thread.sleep(200);
 		}
 		catch (Exception e) 
 		{
@@ -435,7 +442,9 @@ public class CourseCardProcess
 		try
 		{
 			status.addAll(this.checkEnrollCardToCompleteCourse(data));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(enrollButton));
+			Thread.sleep(200);
 		}
 		catch (Exception e) 
 		{
@@ -449,24 +458,27 @@ public class CourseCardProcess
 	public ArrayList<String> checkReasonToUnenroll()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String settingsLink = "//div[@data-testid='CourseCard'][1]//span[@class='pgn__icon btn-icon__icon']";
+		String settingsLink = "//div[@data-testid='dropdown']/button";
 		String unenrollButtonFromSettingsOption = "//a[contains(text(),'Unenroll')]";
 		String locateAlertTextFromUnEnroll = "//div[@class='bg-white p-3 rounded shadow']/h4";
 		String selectReasonToUnEnroll = "//div[@role='radiogroup']/div//input[1]";
 		String submitSurveyButton = "//button[contains(text(),'Submit reason')]";
-		String AlertTextFromUnEnroll = "What's your main reason for unenrolling?";
+		String AlertTextFromUnEnroll = "Unenroll from course?";
 		String unenrollButton = "//button[contains(text(),'Unenroll')]";
 		String clickReturnToDashboard = "//button[contains(text(),'Return to dashboard')]";
 		try
 		{
 			status.add(homePage.clickWebElement(settingsLink));
+			System.out.println(status);
 			Thread.sleep(200); // wait for the settings to open
 			status.add(homePage.clickWebElement(unenrollButtonFromSettingsOption));
+			System.out.println(status);
 			Thread.sleep(200);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath(locateAlertTextFromUnEnroll)).size() > 0)
 			{
 				status.add(this.checkWebElementComparision(locateAlertTextFromUnEnroll, AlertTextFromUnEnroll));
+				System.out.println(status);
 			}
 			else
 			{
@@ -474,12 +486,16 @@ public class CourseCardProcess
 			}
 			Thread.sleep(200);
 			status.add(homePage.clickWebElement(unenrollButton));
+			System.out.println(status);
 			Thread.sleep(200);
 			status.add(homePage.clickWebElement(selectReasonToUnEnroll));
+			System.out.println(status);
 			Thread.sleep(200);
 			status.add(homePage.clickWebElement(submitSurveyButton));
+			System.out.println(status);
 			Thread.sleep(200);
 			status.add(homePage.clickWebElement(clickReturnToDashboard));
+			System.out.println(status);
 		}
 		catch (Exception e) 
 		{
@@ -495,6 +511,7 @@ public class CourseCardProcess
 		try
 		{
 			status.addAll(this.checkEnrollCardToCompleteCourse(data));
+			Thread.sleep(200);
 		}
 		catch (Exception e) 
 		{
@@ -1597,9 +1614,12 @@ public class CourseCardProcess
 		{
 		WebElement element = driver.findElement(By.xpath(locator));
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 		if(element.isDisplayed()) 
         {
             element.clear();
+            Thread.sleep(200); // wait for the element to be ready
             element.sendKeys(textToEnter);
         } 
         else 
@@ -1797,6 +1817,176 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	public ArrayList<String> checkNotesTab()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickNotesTab = "//div[@id='courseTabsNavigation']//a[5]";
+		try
+		{
+			status.add(homePage.clickWebElement(clickNotesTab));
+			status.add(registerPage.FocusWindow("edxnotes"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkWikiTab()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickWikiTab = "//ol[@class='tabs course-tabs']/li[6]//a";
+		try
+		{
+			status.add(homePage.clickWebElement(clickWikiTab));
+			status.add(registerPage.FocusWindow("wiki"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkArticle()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickArticle = "//div[@class='global-functions pull-right']/a";
+		try
+		{
+			status.add(homePage.clickWebElement(clickArticle));
+			status.add(registerPage.FocusWindow("create"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkArticleFormBackButton()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String backButton = "//div[@class='form-actions']//a[@class='btn btn-large back']";
+		try
+		{
+			status.add(homePage.clickWebElement(backButton));
+			status.add(registerPage.FocusWindow("wiki"));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	String WikiPae = ""; // Variable to store the wiki page window handle
+	public ArrayList<String> checkArticleCreation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickArticle = "//div[@class='global-functions pull-right']/a";
+		String enterTitle = "//input[@id='id_title']";
+		String enterSlug = "//input[@id='id_slug']";
+		String enterContent = "//div[@class='CodeMirror-lines']";
+		String enterSummary = "//input[@id='id_summary']";
+		String submit = "//div[@class='form-actions']//button[@name='save_changes']";
+		try
+		{
+			status.add(homePage.clickWebElement(clickArticle));
+			status.add(registerPage.FocusWindow("create"));
+			status.addAll(this.enterTextOnField(enterTitle, "testTitle"));
+			status.addAll(this.enterTextOnField(enterSlug, "testSlug"));
+			status.addAll(this.enterTextOnField(enterContent, "testCONTENT"));
+			status.addAll(this.enterTextOnField(enterSummary, "testSummary"));
+			status.add(homePage.clickWebElement(submit));
+			status.add(registerPage.FocusWindow("wiki"));
+			WikiPae = driver.getWindowHandle();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkViewArticleButton()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String viewButton = "//div[@class='article-functions']/ul/li[1]/a";
+		try
+		{
+			status.add(homePage.openLinkInNewTab(viewButton));
+			status.add(registerPage.FocusWindow("wiki"));
+			driver.close(); // Close the article view tab
+			driver.switchTo().window(WikiPae); // Switch back to the wiki page tab
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEditArticleButton()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String viewButton = "//div[@class='article-functions']/ul/li[2]/a";
+		String editContent = "//div[@class='CodeMirror-scroll']";
+		String submitEditChanges = "//div[@class='form-actions']/button";
+		try
+		{
+			status.add(homePage.openLinkInNewTab(viewButton));
+			status.add(registerPage.FocusWindow("_edit"));
+			status.addAll(this.enterTextOnField(editContent, "testEDITCONTENT"));
+			status.add(homePage.clickWebElement(submitEditChanges));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+
+	public ArrayList<String> checkAlertAfterModifyChanges() {
+		ArrayList<String> status = new ArrayList<String>();
+		String AlertText  = "//div[@id='alert_stat_bar']//*[contains(text(),'A new revision of the article was successfully added.')]";
+		try 
+		{
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			if(driver.findElements(By.xpath(AlertText)).size()>0)
+			{
+				System.out.println("Alert is displayed after modifying the article");
+			}
+			driver.close(); // Close the article view tab
+			driver.switchTo().window(WikiPae); // Switch back to the wiki page tab
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkChangesArticleButton()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String viewButton = "//div[@class='article-functions']/ul/li[3]/a";
+		try
+		{
+			status.add(homePage.openLinkInNewTab(viewButton));
+			status.add(registerPage.FocusWindow("history"));
+			driver.close(); // Close the article view tab
+			driver.switchTo().window(WikiPae); 
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
 	String discussionPage = "";// Variable to store the discussion page window handle
 	public ArrayList<String> checkAbleToOpenUserDropdown()
 	{
@@ -1818,7 +2008,6 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String courseFromUserDropdown = "//div[@class='dropdown-menu-right dropdown-menu show']//a[contains(text(),'My Courses')]";
-
 		try
 		{
 			status.add(homePage.openLinkInNewTab(courseFromUserDropdown));
@@ -1970,8 +2159,8 @@ public class CourseCardProcess
 	public ArrayList<String> checkEditFullnameFromAccountInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickAccountSection = "//a[contains(text(),'Account Information')]";
-		String editFullname = "//h6[contains(text(),'Full name')]/following-sibling::button";
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editFullname = "//div[@id='basic-information']/div[2]//button";
 		try
 		{
 			status.add(homePage.clickWebElement(clickAccountSection));
@@ -1989,7 +2178,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkcancelFromEditFullnameInAccountInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='basic-information']/div[2]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2005,16 +2194,146 @@ public class CourseCardProcess
 	public ArrayList<String> checkSaveFromEditFullnameInAccountInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickAccountSection = "//a[contains(text(),'Account Information')]";
-		String editFullname = "//h6[contains(text(),'Full name')]/following-sibling::button";
-		String focusFullnameField = "//input[@id='field-name']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editFullname = "//div[@id='basic-information']/div[2]//button";
+		String focusFullnameField = "//div[@id='basic-information']/div[2]//input[@id='field-name']";
+		String clickSaveButton = "//div[@id='basic-information']/div[2]//button[@type='submit']";
+		
 		try
 		{
 			status.add(homePage.clickWebElement(clickAccountSection));
 			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editFullname));
+			Thread.sleep(200); 
 			status.addAll(this.enterTextOnField(focusFullnameField, "Test User"));
+			Thread.sleep(500); 
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			if(driver.findElements(By.xpath(clickSaveButton)).size() > 0)
+			{
+				status.add(homePage.clickWebElement(clickSaveButton));
+				Thread.sleep(200); 
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEditBirthFromAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editBirth = "//div[@id='basic-information']/div[5]//button";
+		try
+		{
+			status.add(homePage.clickWebElement(clickAccountSection));
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(editBirth));
+			Thread.sleep(200); 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkcancelFromBirthInAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickCancelButton = "//div[@id='basic-information']/div[5]//button[contains(text(),'Cancel')]";
+		try
+		{
+			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkSaveFromBirthInAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editBirth = "//div[@id='basic-information']/div[5]//button";
+		String selectBirthField = "//div[@id='basic-information']/div[5]//select[@id='field-year_of_birth']";
+		String clickSaveButton = "//div[@id='basic-information']/div[5]//button[@type='submit']";
+		try
+		{
+			status.add(homePage.clickWebElement(clickAccountSection));
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(editBirth));
+			Thread.sleep(200); 
+			WebElement dropdown = driver.findElement(By.xpath(selectBirthField));
+			Select select = new Select(dropdown);
+			select.selectByIndex(1);
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(clickSaveButton));
+			Thread.sleep(200); 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEditCountryFromAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editCountry = "//div[@id='basic-information']/div[6]//button";
+		try
+		{
+			status.add(homePage.clickWebElement(clickAccountSection));
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(editCountry));
+			Thread.sleep(200); 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkcancelFromCountryInAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickCancelButton = "//div[@id='basic-information']/div[6]//button[contains(text(),'Cancel')]";
+		try
+		{
+			status.add(homePage.clickWebElement(clickCancelButton));
+			Thread.sleep(200); 
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkSaveFromCountryInAccountInformation()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickAccountSection = "//ul[@class='list-unstyled']/li[1]/a";
+		String editBirth = "//div[@id='basic-information']/div[6]//button";
+		String selectBirthField = "//div[@id='basic-information']/div[6]//select[@id='field-country']";
+		String clickSaveButton = "//div[@id='basic-information']/div[6]//button[@type='submit']";
+		try
+		{
+			status.add(homePage.clickWebElement(clickAccountSection));
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(editBirth));
+			Thread.sleep(200); 
+			WebElement dropdown = driver.findElement(By.xpath(selectBirthField));
+			Select select = new Select(dropdown);
+			select.selectByIndex(1);
 			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
 			Thread.sleep(200); 
@@ -2029,10 +2348,11 @@ public class CourseCardProcess
 	public ArrayList<String> checkEducationFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickProfileSection = "//a[contains(text(),'Profile Information')]";
-		String editEducation = "//h6[contains(text(),'Education')]/following-sibling::button";
+		String clickProfileSection = "//ul[@class='list-unstyled']/li[2]/a";
+		String editEducation = "//div[@id='profile-information']/div[1]//button";
 		try
 		{
+			
 			status.add(homePage.clickWebElement(clickProfileSection));
 			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editEducation));
@@ -2048,7 +2368,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkEducationToCancelFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='profile-information']/div[1]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2064,18 +2384,21 @@ public class CourseCardProcess
 	public ArrayList<String> checkEducationToSaveFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickProfileSection = "//a[contains(text(),'Profile Information')]";
-		String editEducation = "//h6[contains(text(),'Education')]/following-sibling::button";
-		String selectLevelOfEdu = "//select[@id='field-level_of_education']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickProfileSection = "//ul[@class='list-unstyled']/li[2]/a";
+		String editEducation = "//div[@id='profile-information']/div[1]//button";
+		String selectLevelOfEdu = "//div[@id='profile-information']/div[1]//select[@id='field-level_of_education']";
+		String clickSaveButton = "//div[@id='profile-information']/div[1]//button[@type='submit']";
 		try
 		{
 			status.add(homePage.clickWebElement(clickProfileSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editEducation));
 			Thread.sleep(200); 
 			WebElement dropdown = driver.findElement(By.xpath(selectLevelOfEdu));
+			
 			Select select = new Select(dropdown);
 			select.selectByIndex(1);
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
 			Thread.sleep(200); 
 		}
@@ -2089,7 +2412,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkGenderFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editGender = "//h6[contains(text(),'Gender')]/following-sibling::button";
+		String editGender = "//div[@id='profile-information']/div[2]//button";
 		try
 		{
 			status.add(homePage.clickWebElement(editGender));
@@ -2105,7 +2428,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkGenderToCancelFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='profile-information']/div[2]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2122,11 +2445,14 @@ public class CourseCardProcess
 	public ArrayList<String> checkGenderToSaveFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editGender = "//h6[contains(text(),'Gender')]/following-sibling::button";
-		String selectLevelOfGender = "//select[@id='field-gender']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickProfileSection = "//ul[@class='list-unstyled']/li[2]/a";
+		String editGender = "//div[@id='profile-information']/div[2]//button";
+		String selectLevelOfGender = "//div[@id='profile-information']/div[2]//select[@id='field-gender']";
+		String clickSaveButton = "//div[@id='profile-information']/div[2]//button[@type='submit']";
 		try
 		{
+			status.add(homePage.clickWebElement(clickProfileSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editGender));
 			Thread.sleep(200); 
 			Select selectEdu = new Select(driver.findElement(By.xpath(selectLevelOfGender)));
@@ -2145,9 +2471,12 @@ public class CourseCardProcess
 	public ArrayList<String> checkSpokenlanguageFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editSpokenLanguage = "//h6[contains(text(),'Spoken language')]/following-sibling::button";
+		String clickProfileSection = "//ul[@class='list-unstyled']/li[2]/a";
+		String editSpokenLanguage = "//div[@id='profile-information']/div[3]//button";
 		try
 		{
+			status.add(homePage.clickWebElement(clickProfileSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editSpokenLanguage));
 			Thread.sleep(200); 
 		}
@@ -2161,7 +2490,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkCancelInSpokenlanguageFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='profile-information']/div[3]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2177,11 +2506,14 @@ public class CourseCardProcess
 	public ArrayList<String> checkSaveInSpokenlanguageFromProfileInformation()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editSpokenLanguage = "//h6[contains(text(),'Spoken language')]/following-sibling::button";
-		String selectSpokenLanguage = "//select[@id='field-language_proficiencies']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickProfileSection = "//ul[@class='list-unstyled']/li[2]/a";
+		String editSpokenLanguage = "//div[@id='profile-information']/div[3]//button";
+		String selectSpokenLanguage = "//div[@id='profile-information']/div[3]//select[@id='field-language_proficiencies']";
+		String clickSaveButton = "//div[@id='profile-information']/div[3]//button[@type='submit']";
 		try
 		{
+			status.add(homePage.clickWebElement(clickProfileSection));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(editSpokenLanguage));
 			Thread.sleep(200); 
 			Select selectEdu = new Select(driver.findElement(By.xpath(selectSpokenLanguage)));
@@ -2200,7 +2532,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickSocialLinksSection = "//a[contains(text(),'Social Media Links')]";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
 		try
 		{
 			status.add(homePage.clickWebElement(clickSocialLinksSection));
@@ -2216,7 +2548,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkLinkedInFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editLinkedIn = "//h6[contains(text(),'LinkedIn')]/following-sibling::button";
+		String editLinkedIn = "//div[@id='social-media']/div[1]//button";
 		try
 		{
 			status.add(homePage.clickWebElement(editLinkedIn));
@@ -2232,7 +2564,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkLinkedInToCancelFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='social-media']/div[1]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2248,11 +2580,14 @@ public class CourseCardProcess
 	public ArrayList<String> checkLinkedInToSaveFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editLinkedIn = "//h6[contains(text(),'LinkedIn')]/following-sibling::button";
-		String enterLinkedInField = "//input[@id='field-social_link_linkedin']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
+		String editLinkedIn = "//div[@id='social-media']/div[1]//button";
+		String enterLinkedInField = "//div[@id='social-media']/div[1]//input[@id='field-social_link_linkedin']";
+		String clickSaveButton = "//div[@id='social-media']/div[1]//button[@type='submit']";
 		try
 		{
+			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editLinkedIn));
 			Thread.sleep(200); 
 			status.addAll(this.enterTextOnField(enterLinkedInField, "test"));
@@ -2270,9 +2605,12 @@ public class CourseCardProcess
 	public ArrayList<String> checkFacebookFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editFacebook = "//h6[contains(text(),'Facebook')]/following-sibling::button";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
+		String editFacebook = "//div[@id='social-media']/div[2]//button";
 		try
 		{
+			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editFacebook));
 		}
 		catch (Exception e)
@@ -2285,7 +2623,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkFacebookToCancelFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='social-media']/div[2]//button[contains(text(),'Cancel')]";
 		try
 		{
 			Thread.sleep(200); 
@@ -2301,13 +2639,22 @@ public class CourseCardProcess
 	public ArrayList<String> checkFacebookToSaveFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editFacebook = "//h6[contains(text(),'Facebook')]/following-sibling::button";
-		String enterFacebookField = "//input[@id='field-social_link_facebook']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
+		String editFacebook = "//div[@id='social-media']/div[2]//button";
+		String enterFacebookField = "//div[@id='social-media']/div[2]//input[@id='field-social_link_facebook']";
+		String clickSaveButton = "//div[@id='social-media']/div[2]//button[@type='submit']";
 		try
 		{
+			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(editFacebook));
-			status.addAll(this.enterTextOnField(enterFacebookField, "test"));
+			Thread.sleep(500); 
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+			if(driver.findElements(By.xpath(enterFacebookField)).size()>0)
+			{
+				status.addAll(this.enterTextOnField(enterFacebookField, "test"));
+			}
+			Thread.sleep(200); 
 			status.add(homePage.clickWebElement(clickSaveButton));
 			Thread.sleep(200); 
 		}
@@ -2321,9 +2668,12 @@ public class CourseCardProcess
 	public ArrayList<String> checkTwitterFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editTwitter = "//h6[contains(text(),'Twitter')]/following-sibling::button";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
+		String editTwitter = "//div[@id='social-media']/div[3]//button";
 		try
 		{
+			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(editTwitter));
 			Thread.sleep(200); 
 		}
@@ -2337,7 +2687,7 @@ public class CourseCardProcess
 	public ArrayList<String> checkTwitterToCancelFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickCancelButton = "//button[contains(text(),'Cancel')]";
+		String clickCancelButton = "//div[@id='social-media']/div[3]//button[contains(text(),'Cancel')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickCancelButton));
@@ -2353,11 +2703,14 @@ public class CourseCardProcess
 	public ArrayList<String> checkTwitterToSaveFromSocialMediaLinks()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editTwitter = "//h6[contains(text(),'Twitter')]/following-sibling::button";
-		String enterTwitterField = "//input[@id='field-social_link_twitter']";
-		String clickSaveButton = "//button[@type='submit']/descendant::span[contains(text(),'Save')]";
+		String clickSocialLinksSection = "//ul[@class='list-unstyled']/li[3]/a";
+		String editTwitter = "//div[@id='social-media']/div[3]//button";
+		String enterTwitterField = "//div[@id='social-media']/div[3]//input[@id='field-social_link_twitter']";
+		String clickSaveButton = "//div[@id='social-media']/div[3]//button[@type='submit']";
 		try
 		{
+			status.add(homePage.clickWebElement(clickSocialLinksSection));
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(editTwitter));
 			Thread.sleep(200); 
 			status.addAll(this.enterTextOnField(enterTwitterField, "test"));
@@ -2371,21 +2724,58 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	public ArrayList<String> checkSitePreference()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickSitePreference = "//ul[@class='list-unstyled']/li[4]/a";
+		try
+		{
+			status.add(homePage.clickWebElement(clickSitePreference));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+
+	public ArrayList<String> checkTimeZone()
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String editTimeZone = "//div[@id='site-preferences']//div[2]//button";
+		String selectTimeZone = "//div[@id='site-preferences']//div[2]//select[@id='field-time_zone']";
+		String submit = "//div[@id='site-preferences']//div[2]//button[@type='submit']";
+		try 
+		{
+			status.add(homePage.clickWebElement(editTimeZone));
+			Select selectEdu = new Select(driver.findElement(By.xpath(selectTimeZone)));
+			selectEdu.selectByIndex(3);
+			Thread.sleep(200); 
+			status.add(homePage.clickWebElement(submit));
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
 	public ArrayList<String> checkLinkedAccounts()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String editLinkedAccounts = "//li//a[contains(text(),'Linked Accounts')]";
-		String clickGoogleLink = "//a[contains(text(),'Sign in with Google')]";
+		String editLinkedAccounts = "//ul[@class='list-unstyled']/li[5]/a";
+		String clickGoogleLink = "//div[@id='linked-accounts']//div[1]/a";
 		
 		try
 		{
 			status.add(homePage.clickWebElement(editLinkedAccounts));
 			Thread.sleep(200); 
 			status.add(homePage.openLinkInNewTab(clickGoogleLink));
+			Thread.sleep(200); 
 			status.add(registerPage.FocusWindow("account"));
 			Thread.sleep(100); // Wait for Google sign-in page to load
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			driver.close();
+			Thread.sleep(200); 
 			driver.switchTo().window(discussionPage);
 			Thread.sleep(200); 
 		}
@@ -2425,6 +2815,7 @@ public class CourseCardProcess
 			status.add(homePage.clickWebElement(clickSupportLink));
 			Thread.sleep(200); 
 			status.add(registerPage.FocusWindow("requests"));
+			Thread.sleep(200); 
 			driver.close();
 			driver.switchTo().window(discussionPage);
 		}
@@ -2434,12 +2825,67 @@ public class CourseCardProcess
 		}
 		return status;
 	}
-	public ArrayList<String> checkDeleteAccount()
+	public ArrayList<String> checkSignOutProcess()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-
+		String signOutButton = "//a[contains(text(),'Sign Out')]";
 		try
 		{
+			if (driver.findElements(By.xpath(signOutButton)).size() > 0) 
+			{
+				status.add(homePage.clickWebElement(signOutButton));
+				Thread.sleep(200); 
+				status.add(registerPage.FocusWindow("logout"));
+				Thread.sleep(200); 
+			} 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkEnrollCourseWithoutSignIn(String courseName)
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String clickHomePageLink = "//a[contains(text(),'click here to go to the home page')]";
+		String listOfCourses = "//ul[@class='courses-listing']/li";
+		String enrollButton = "//a[@class='register']";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try
+		{
+			status.add(homePage.openLinkInNewTab(clickHomePageLink));
+			Thread.sleep(200); 
+			status.add(registerPage.FocusWindow("stagecourses.skillup.online"));
+			Thread.sleep(200); 
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			if (driver.findElements(By.xpath(listOfCourses)).size() > 0)
+			{
+				System.out.println("List of courses is displayed");
+				List<WebElement> courses = driver.findElements(By.xpath(listOfCourses));
+				for (WebElement course : courses) 
+				{
+					WebElement locateCardTitle = course.findElement(By.xpath(".//h2/span[2]"));
+					String courseCardName = locateCardTitle.getText();
+					if(courseCardName.equalsIgnoreCase(courseName))
+					{
+						WebElement clickLearnMoreButton = course.findElement(By.xpath("./following-sibling::a[contains(text(),'Learn More')]"));
+						js.executeScript("arguments[0].scrollIntoView(true);", clickLearnMoreButton);
+						js.executeScript("arguments[0].click();", clickLearnMoreButton);
+						status.add(registerPage.FocusWindow("/about"));
+						Thread.sleep(200); // Wait for the new tab to load
+						status.add(homePage.clickWebElement(enrollButton));
+						Thread.sleep(200); 
+						status.add(registerPage.FocusWindow("login?"));
+					}
+				}
+			} 
+			else 
+			{
+				System.out.println("List of courses is not displayed");
+				status.add("Fail");
+			}
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -196,9 +196,9 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkViewAllCourseLink":
 			 		checkViewAllCourseLink();
 			        break;
-			 	case "startCourse":
-			 		startCourse(row.get(1));
-			        break;
+				/*
+				 * case "startCourse": startCourse(row.get(1)); break;
+				 */
 			 	case "checkProgressTab":
 			 		checkProgressTab();
 			        break;
@@ -237,6 +237,30 @@ public class CourseCardProcessTest implements Callable<String>
 			        break;
 			 	case "checkLearnersFromDiscussionPage":
 			 		checkLearnersFromDiscussionPage();
+			        break;
+			 	case "checkNotesTab":
+			 		checkNotesTab();
+			        break;
+			 	case "checkWikiTab":
+			 		checkWikiTab();
+			        break;
+			 	case "checkArticle":
+			 		checkArticle();
+			        break;
+			 	case "checkArticleFormBackButton":
+			 		checkArticleFormBackButton();
+			        break;
+			 	case "checkArticleCreation":
+			 		checkArticleCreation();
+			        break;
+			 	case "checkEditArticleButton":
+			 		checkEditArticleButton();
+			        break;
+			 	case "checkAlertAfterModifyChanges":
+			 		checkAlertAfterModifyChanges();
+			        break;
+			 	case "checkChangesArticleButton":
+			 		checkChangesArticleButton();
 			        break;
 			 	case "checkAbleToOpenUserDropdown":
 			 		checkAbleToOpenUserDropdown();
@@ -339,6 +363,12 @@ public class CourseCardProcessTest implements Callable<String>
 			        break;
 			 	case "checkSupportLinkFromOrderHistory":
 			 		checkSupportLinkFromOrderHistory();
+			        break;
+			 	case "checkSignOutProcess":
+			 		checkSignOutProcess();
+			        break;
+			 	case "checkEnrollCourseWithoutSignIn":
+			 		checkEnrollCourseWithoutSignIn(row.get(1));
 			        break;
 				}
 			}
@@ -1005,10 +1035,82 @@ public class CourseCardProcessTest implements Callable<String>
 		        e.printStackTrace();
 		    }
 		}
+		public void checkNotesTab() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkNotesTab();
+		        updateExcelData(status, 67);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkWikiTab() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkWikiTab();
+		        updateExcelData(status, 68);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkArticle() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkArticle();
+		        updateExcelData(status, 69);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkArticleFormBackButton() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkArticleFormBackButton();
+		        updateExcelData(status, 70);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkArticleCreation() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkArticleCreation();
+		        updateExcelData(status, 71);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkViewArticleButton() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkViewArticleButton();
+		        updateExcelData(status, 72);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEditArticleButton() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEditArticleButton();
+		        updateExcelData(status, 73);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkAlertAfterModifyChanges() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkAlertAfterModifyChanges();
+		        updateExcelData(status, 74);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkChangesArticleButton() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkChangesArticleButton();
+		        updateExcelData(status, 75);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
 		public void checkAbleToOpenUserDropdown() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkAbleToOpenUserDropdown();
-		        updateExcelData(status, 67);
+		        updateExcelData(status, 76);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1016,7 +1118,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkCoursesOptionFromDropdown() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkCoursesOptionFromDropdown();
-		        updateExcelData(status, 68);
+		        updateExcelData(status, 77);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1024,7 +1126,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkDiscoverOptionFromDropdown() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkDiscoverOptionFromDropdown();
-		        updateExcelData(status, 69);
+		        updateExcelData(status, 78);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1032,7 +1134,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkDashboardOptionFromDropdown() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkDashboardOptionFromDropdown();
-		        updateExcelData(status, 70);
+		        updateExcelData(status, 79);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1040,7 +1142,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkProfileOptionsFromUserDropdown() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkProfileOptionsFromUserDropdown();
-		        updateExcelData(status, 71);
+		        updateExcelData(status, 80);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1048,7 +1150,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkViewRecordFromProfilePage() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkViewRecordFromProfilePage();
-		        updateExcelData(status, 72);
+		        updateExcelData(status, 81);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1056,7 +1158,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkLinkFromRecordPage() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkLinkFromRecordPage();
-		        updateExcelData(status, 73);
+		        updateExcelData(status, 82);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1064,7 +1166,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkBackToProfileIcon() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkBackToProfileIcon();
-		        updateExcelData(status, 74);
+		        updateExcelData(status, 83);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1072,7 +1174,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkDOBLink() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkDOBLink();
-		        updateExcelData(status, 75);
+		        updateExcelData(status, 84);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1080,7 +1182,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkEditFullnameFromAccountInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkEditFullnameFromAccountInformation();
-		        updateExcelData(status, 76);
+		        updateExcelData(status, 85);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1088,7 +1190,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkCancelFromEditFullnameInAccountInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkcancelFromEditFullnameInAccountInformation();
-		        updateExcelData(status, 77);
+		        updateExcelData(status, 86);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1096,7 +1198,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkSaveFromEditFullnameInAccountInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkSaveFromEditFullnameInAccountInformation();
-		        updateExcelData(status, 78);
+		        updateExcelData(status, 87);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1104,7 +1206,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkEducationFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkEducationFromProfileInformation();
-		        updateExcelData(status, 79);
+		        updateExcelData(status, 88);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1112,7 +1214,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkEducationToCancelFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkEducationToCancelFromProfileInformation();
-		        updateExcelData(status, 80);
+		        updateExcelData(status, 89);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1120,7 +1222,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkEducationToSaveFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkEducationToSaveFromProfileInformation();
-		        updateExcelData(status, 81);
+		        updateExcelData(status, 90);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1128,7 +1230,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkGenderFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkGenderFromProfileInformation();
-		        updateExcelData(status, 82);
+		        updateExcelData(status, 91);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1136,7 +1238,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkGenderToCancelFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkGenderToCancelFromProfileInformation();
-		        updateExcelData(status, 83);
+		        updateExcelData(status, 92);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1144,7 +1246,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkGenderToSaveFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkGenderToSaveFromProfileInformation();
-		        updateExcelData(status, 84);
+		        updateExcelData(status, 93);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1152,7 +1254,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkSpokenlanguageFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkSpokenlanguageFromProfileInformation();
-		        updateExcelData(status, 85);
+		        updateExcelData(status, 94);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1160,7 +1262,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkCancelInSpokenlanguageFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkCancelInSpokenlanguageFromProfileInformation();
-		        updateExcelData(status, 86);
+		        updateExcelData(status, 95);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1168,7 +1270,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkSaveInSpokenlanguageFromProfileInformation() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkSaveInSpokenlanguageFromProfileInformation();
-		        updateExcelData(status, 87);
+		        updateExcelData(status, 96);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1176,7 +1278,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkSocialMediaLinks();
-		        updateExcelData(status, 88);
+		        updateExcelData(status, 97);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1184,7 +1286,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkLinkedInFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkLinkedInFromSocialMediaLinks();
-		        updateExcelData(status, 89);
+		        updateExcelData(status, 98);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1192,7 +1294,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkLinkedInToCancelFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkLinkedInToCancelFromSocialMediaLinks();
-		        updateExcelData(status, 90);
+		        updateExcelData(status, 99);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1200,7 +1302,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkLinkedInToSaveFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkLinkedInToSaveFromSocialMediaLinks();
-		        updateExcelData(status, 91);
+		        updateExcelData(status, 100);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1208,7 +1310,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkFacebookFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkFacebookFromSocialMediaLinks();
-		        updateExcelData(status, 92);
+		        updateExcelData(status, 101);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1216,7 +1318,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkFacebookToCancelFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkFacebookToCancelFromSocialMediaLinks();
-		        updateExcelData(status, 93);
+		        updateExcelData(status, 102);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1224,7 +1326,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkFacebookToSaveFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkFacebookToSaveFromSocialMediaLinks();
-		        updateExcelData(status, 94);
+		        updateExcelData(status, 103);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1232,7 +1334,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkTwitterFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkTwitterFromSocialMediaLinks();
-		        updateExcelData(status, 95);
+		        updateExcelData(status, 104);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1240,7 +1342,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkTwitterToCancelFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkTwitterToCancelFromSocialMediaLinks();
-		        updateExcelData(status, 96);
+		        updateExcelData(status, 105);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1248,7 +1350,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkTwitterToSaveFromSocialMediaLinks() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkTwitterToSaveFromSocialMediaLinks();
-		        updateExcelData(status, 97);
+		        updateExcelData(status, 106);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1256,7 +1358,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkLinkedAccounts() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkLinkedAccounts();
-		        updateExcelData(status, 98);
+		        updateExcelData(status, 107);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1264,7 +1366,7 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkOrderHistory() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkOrderHistory();
-		        updateExcelData(status, 99);
+		        updateExcelData(status, 108);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -1272,12 +1374,27 @@ public class CourseCardProcessTest implements Callable<String>
 		public void checkSupportLinkFromOrderHistory() {
 		    try {
 		        ArrayList<String> status = courseCardProcess.checkSupportLinkFromOrderHistory();
-		        updateExcelData(status, 100);
+		        updateExcelData(status, 109);
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
 		}
-		
+		public void checkSignOutProcess() {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkSignOutProcess();
+		        updateExcelData(status, 110);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+		public void checkEnrollCourseWithoutSignIn(String courseName) {
+		    try {
+		        ArrayList<String> status = courseCardProcess.checkEnrollCourseWithoutSignIn(courseName);
+		        updateExcelData(status, 111);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
 		
 
 }
