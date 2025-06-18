@@ -197,11 +197,12 @@ public class CourseCardProcessTest implements Callable<String>
 			 		checkViewAllCourseLink();
 			        break;
 				/*
-				 * case "startCourse": startCourse(row.get(1)); break;
+				 * case "startCourse": startCourse(row); break;
 				 */
 			 	case "checkProgressTab":
 			 		checkProgressTab();
 			        break;
+			        
 			 	case "checkDiscussionTabFromHomePage":
 			 		checkDiscussionTabFromHomePage();
 			        break;
@@ -251,8 +252,11 @@ public class CourseCardProcessTest implements Callable<String>
 			 		checkArticleFormBackButton();
 			        break;
 			 	case "checkArticleCreation":
-			 		checkArticleCreation();
+			 		checkArticleCreation(row);
 			        break;
+				/*
+				 * case "checkViewArticleButton": checkViewArticleButton(); break;
+				 */
 			 	case "checkEditArticleButton":
 			 		checkEditArticleButton();
 			        break;
@@ -370,6 +374,7 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkEnrollCourseWithoutSignIn":
 			 		checkEnrollCourseWithoutSignIn(row.get(1));
 			        break;
+			 	
 				}
 			}
 		 
@@ -921,11 +926,15 @@ public class CourseCardProcessTest implements Callable<String>
 		    }
 		}
 
-		public void startCourse(String filepath) {
-		    try {
-		        ArrayList<String> status = courseCardProcess.startCourse(filepath);
+		public void startCourse(ArrayList<String> data) 
+		{
+		    try
+		    {
+		        ArrayList<String> status = courseCardProcess.startCourse(data);
 		        updateExcelData(status, 53);
-		    } catch (Exception e) {
+		    } 
+		    catch (Exception e) 
+		    {
 		        e.printStackTrace();
 		    }
 		}
@@ -1067,9 +1076,9 @@ public class CourseCardProcessTest implements Callable<String>
 		        e.printStackTrace();
 		    }
 		}
-		public void checkArticleCreation() {
+		public void checkArticleCreation(ArrayList<String> data) {
 		    try {
-		        ArrayList<String> status = courseCardProcess.checkArticleCreation();
+		        ArrayList<String> status = courseCardProcess.checkArticleCreation(data);
 		        updateExcelData(status, 71);
 		    } catch (Exception e) {
 		        e.printStackTrace();

@@ -1248,7 +1248,7 @@ public class CourseCardProcess
 	}
 	String courseContentPage = "";
 	int count = 0;
-	public ArrayList<String> startCourse(String filepath)
+	public ArrayList<String> startCourse(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickStartCourse = "//a[contains(text(),'Start course')]";
@@ -1335,7 +1335,7 @@ public class CourseCardProcess
 				{
 					System.out.println("Video frame is not available.");
 				}
-				status.addAll(this.fileUpload(filepath));
+				status.addAll(this.fileUpload(data.get(1)));
 				status.addAll(this.surveyTable());
 				status.addAll(this.Fullscreen());
 				status.addAll(this.answerQuiz());
@@ -1348,12 +1348,54 @@ public class CourseCardProcess
 				}
 				status.add(homePage.clickWebElement(nextButton));
 			}
+			status.addAll(this.checkCalculator(data.get(2)));
+			status.addAll(this.checkHideNotes(status));
 		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
 		return status;
+	}
+	public ArrayList<String> checkCalculator(String data)
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String calculatorLocator = "//a[contains(text(),'Calculator')]";
+		String calculatorInput = "//input[@aria-label='Calculator Input']";
+		String calculatorResult = "//input[@aria-label='Calculator Result']";
+		String calculatorButton = "//button[@aria-label='Calculate']";
+		try
+		{
+			status.add(homePage.clickWebElement(calculatorLocator));
+			status.addAll(this.enterTextOnField(calculatorInput, data)); // Entering text in calculator input)
+			status.add(homePage.clickWebElement(calculatorButton)); // Click the calculate button
+			String resultText = driver.findElement(By.xpath(calculatorResult)).getAttribute("value");
+			System.out.println("Calculator Result: " + resultText);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
+	public ArrayList<String> checkHideNotes(ArrayList<String> data)
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String hideNotesLocator = "//button[contains(text(),'Hide Notes')]";
+		try
+		{
+			status.add(homePage.clickWebElement(hideNotesLocator));
+			System.out.println("Notes are shown successfully.");
+			status.add(homePage.clickWebElement(hideNotesLocator));
+			System.out.println("Notes are hidden successfully.");
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			data.add("Fail");
+		}
+		return data;
 	}
 	public ArrayList<String> fileUpload(String filePath)
 	{
@@ -1649,6 +1691,25 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	public ArrayList<String> checkDiscussionTabForInvalidSearch(String data)
+	{
+		ArrayList<String> status = new ArrayList<String>();
+		String searchTextField = "//input[@id='pgn-searchfield-input-1']";
+		String searchIcon = "//span[@data-testid='search-icon']";
+		String checkValidationAlert = "//*[contains(text(),'Showing 0 results for')]";
+		try {
+			status.addAll(this.enterTextOnField(searchTextField, data));
+			status.add(homePage.clickWebElement(searchIcon));
+			if(driver.findElements(By.xpath(checkValidationAlert)).size()<0)
+			{
+				status.add("Fail");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Fail");
+		}
+		return status;
+	}
 	public ArrayList<String> checkAddPostButtonFromDiscussionHomePage()
 	{
 		ArrayList<String> status = new ArrayList<String>();
@@ -1882,24 +1943,41 @@ public class CourseCardProcess
 		return status;
 	}
 	String WikiPae = ""; // Variable to store the wiki page window handle
-	public ArrayList<String> checkArticleCreation()
+	public ArrayList<String> checkArticleCreation(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickArticle = "//div[@class='global-functions pull-right']/a";
 		String enterTitle = "//input[@id='id_title']";
 		String enterSlug = "//input[@id='id_slug']";
-		String enterContent = "//div[@class='CodeMirror-lines']";
 		String enterSummary = "//input[@id='id_summary']";
 		String submit = "//div[@class='form-actions']//button[@name='save_changes']";
+		String alertTextForCreation = "//div[@ID='alert_stat_bar']//div[contains(text(),'created')]";
 		try
 		{
 			status.add(homePage.clickWebElement(clickArticle));
 			status.add(registerPage.FocusWindow("create"));
-			status.addAll(this.enterTextOnField(enterTitle, "testTitle"));
-			status.addAll(this.enterTextOnField(enterSlug, "testSlug"));
-			status.addAll(this.enterTextOnField(enterContent, "testCONTENT"));
-			status.addAll(this.enterTextOnField(enterSummary, "testSummary"));
+			status.addAll(this.enterTextOnField(enterTitle, data.get(1)));
+			status.addAll(this.enterTextOnField(enterSlug, data.get(2)));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		    wait.until(ExpectedConditions.presenceOfElementLocated(By.className("CodeMirror")));
+
+		    String value = data.get(3);  // Get the actual value from the list
+
+		    JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("document.querySelector('.CodeMirror').CodeMirror.setValue(arguments[0]);", value);
+
+		    // Optional: verify the content
+		    String content = (String) js.executeScript("return document.querySelector('.CodeMirror').CodeMirror.getValue();");
+		    System.out.println("Content in CodeMirror: " + content);
+			status.addAll(this.enterTextOnField(enterSummary, data.get(4)));
 			status.add(homePage.clickWebElement(submit));
+			if (driver.findElements(By.xpath(alertTextForCreation)).size() > 0) {
+				System.out.println("Article created successfully.");
+			} 
+			else {
+				System.out.println("Article creation failed.");
+				status.add("Fail");
+			}
 			status.add(registerPage.FocusWindow("wiki"));
 			WikiPae = driver.getWindowHandle();
 		}
@@ -1914,10 +1992,11 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String viewButton = "//div[@class='article-functions']/ul/li[1]/a";
+		System.out.println("verifying view article");
 		try
 		{
 			status.add(homePage.openLinkInNewTab(viewButton));
-			status.add(registerPage.FocusWindow("wiki"));
+			status.add(registerPage.FocusWindow("wiki/SKO.101_3.1/"));
 			driver.close(); // Close the article view tab
 			driver.switchTo().window(WikiPae); // Switch back to the wiki page tab
 		}
@@ -1931,14 +2010,19 @@ public class CourseCardProcess
 	public ArrayList<String> checkEditArticleButton()
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String viewButton = "//div[@class='article-functions']/ul/li[2]/a";
-		String editContent = "//div[@class='CodeMirror-scroll']";
+		String EditButton = "//div[@class='article-functions']/ul/li[2]/a";
 		String submitEditChanges = "//div[@class='form-actions']/button";
 		try
 		{
-			status.add(homePage.openLinkInNewTab(viewButton));
+			status.add(homePage.openLinkInNewTab(EditButton));
 			status.add(registerPage.FocusWindow("_edit"));
-			status.addAll(this.enterTextOnField(editContent, "testEDITCONTENT"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("document.querySelector('.CodeMirror').CodeMirror.setValue(arguments[0]);", "testEDITCONTENT3");
+
+		    // Optional: verify the content
+		    String content = (String) js.executeScript("return document.querySelector('.CodeMirror').CodeMirror.getValue();");
+		    System.out.println("Content in CodeMirror: " + content);
+			//status.addAll(this.enterTextOnField(editContent, "testEDITCONTENT"));
 			status.add(homePage.clickWebElement(submitEditChanges));
 		}
 		catch(Exception e)
@@ -1973,12 +2057,15 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String viewButton = "//div[@class='article-functions']/ul/li[3]/a";
+		String locateDiscussionTab = "//ol[@class='tabs course-tabs']/li[4]/a";
 		try
 		{
 			status.add(homePage.openLinkInNewTab(viewButton));
 			status.add(registerPage.FocusWindow("history"));
 			driver.close(); // Close the article view tab
 			driver.switchTo().window(WikiPae); 
+			status.add(homePage.clickWebElement(locateDiscussionTab)); // Click on discussion tab
+			status.add(registerPage.FocusWindow("discussion"));
 		}
 		catch(Exception e)
 		{
@@ -2647,6 +2734,7 @@ public class CourseCardProcess
 		{
 			status.add(homePage.clickWebElement(clickSocialLinksSection));
 			Thread.sleep(200); 
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
 			status.add(homePage.clickWebElement(editFacebook));
 			Thread.sleep(500); 
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
