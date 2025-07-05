@@ -309,4 +309,32 @@ public class ForgetPasswordPage
 		}
 		return  status;
 	}
+	
+	public ArrayList<String> checkPasswordResetMail(String mail) {
+		ArrayList<String> status = new ArrayList<>();
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Error");
+		}
+		return status;
+	}
+	public ArrayList<String> checkResetMailActionLink() {
+		ArrayList<String> status = new ArrayList<>();
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Error");
+		}
+		return status;
+	}
+	public ArrayList<String> checkRestPaswwordProcess() {
+		ArrayList<String> status = new ArrayList<>();
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			status.add("Error");
+		}
+		return status;
+	}
 }

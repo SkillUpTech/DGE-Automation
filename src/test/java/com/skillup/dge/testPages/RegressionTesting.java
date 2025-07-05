@@ -78,7 +78,7 @@ public class RegressionTesting {
 		ExecutorService service = Executors.newFixedThreadPool(1);
 		CompletionService<String> completionService = new ExecutorCompletionService<>(service);
 
-		String excelPath = "D:\\Doc\\DGE_TestCases.xlsx";
+		String excelPath = "D:\\Doc\\DGE_TestCaseCorrection.xlsx";
 		EXCEL_DATA_AS_SHEEET_NAME_AND_ROWS_MAP = new LinkedHashMap<>();
 
 		startTime = new SimpleDateFormat(Utils.DEFAULT_DATA_FORMAT).format(Calendar.getInstance().getTime());
@@ -106,7 +106,8 @@ public class RegressionTesting {
 					ArrayList<ArrayList<String>> sheetData = data.get(sheetName);
 					try {
 						sheetStatus = "";
-						switch (sheetName) {
+						switch (sheetName) 
+						{
 							case "Register":
 								taskMap.put(sheetName, new RegisterPageTest(driver, sheetData));
 								break;
@@ -121,6 +122,21 @@ public class RegressionTesting {
 								break;
 							case "CourseCard":
 								taskMap.put(sheetName, new CourseCardProcessTest(driver, sheetData));
+								break;
+							case "Dashboard":
+								taskMap.put(sheetName, new DashboardTest(driver, sheetData));
+								break;
+							case "CourseExperience":
+								taskMap.put(sheetName, new CourseExperienceTest(driver, sheetData));
+								break;
+							case "UserProfileDropdown":
+								taskMap.put(sheetName, new UserProfileDropdownTest(driver, sheetData));
+								break;
+							case "InstructorExperience":
+								taskMap.put(sheetName, new UserProfileDropdownTest(driver, sheetData));
+								break;
+							case "MembershipTab":
+								taskMap.put(sheetName, new UserProfileDropdownTest(driver, sheetData));
 								break;
 							default:
 								System.out.println("No class found for sheet: " + sheetName);

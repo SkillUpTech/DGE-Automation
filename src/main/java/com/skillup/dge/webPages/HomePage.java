@@ -86,6 +86,8 @@ public class HomePage
 		    }
 		return status;
 	}
+	String getHomePageURL= "";
+	
 	public ArrayList<String> checkHomePageURL(String url)
 	{
 		ArrayList<String> status = new ArrayList<String>();
@@ -93,6 +95,7 @@ public class HomePage
 		try
 		{
 			driver.switchTo().newWindow(WindowType.TAB); // Open a new tab)
+			getHomePageURL = url;
 			driver.get(url); // Navigate to the URL
 			System.out.println("home page url lanuched");
 		}
@@ -103,7 +106,6 @@ public class HomePage
         }
 		return status;
 	}
-	
 	public ArrayList<String> CheckSkillupLogoFromHomePageTop()
 	{
 		ArrayList<String> status = new ArrayList<String>();
@@ -508,7 +510,9 @@ public class HomePage
 			Thread.sleep(200);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(70));
 			System.out.println("sign in done");
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 			status.add("Fail");
 		}

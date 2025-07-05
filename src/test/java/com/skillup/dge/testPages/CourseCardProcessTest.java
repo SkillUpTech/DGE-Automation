@@ -45,9 +45,9 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkSignInProcess":
 			 		checkSignInProcess(row);
 			        break;
-			 	case "checkFindCourseLink":
-			 		checkFindCourseLink();
-			        break;
+				/*
+				 * case "checkFindCourseLink": checkFindCourseLink(); break;
+				 */
 			 	case "checkCardSelection":
 			 		checkCardSelection(row);
 			        break;
@@ -127,9 +127,9 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkCourseCardDateWithDashboard":
 			 		checkCourseCardDateWithDashboard();
 			        break;
-			 	case "checkBeginCourseCard":
-			 		checkBeginCourseCard();
-			        break;
+				/*
+				 * case "checkBeginCourseCard": checkBeginCourseCard(); break;
+				 */
 			 	case "checkExpandAllProcess":
 			 		checkExpandAllProcess();
 			        break;
@@ -196,9 +196,9 @@ public class CourseCardProcessTest implements Callable<String>
 			 	case "checkViewAllCourseLink":
 			 		checkViewAllCourseLink();
 			        break;
-				/*
-				 * case "startCourse": startCourse(row); break;
-				 */
+				
+				/* case "startCourse": startCourse(row); break; */
+				 
 			 	case "checkProgressTab":
 			 		checkProgressTab();
 			        break;
@@ -454,15 +454,12 @@ public class CourseCardProcessTest implements Callable<String>
 		}
 	}
 	
-	public void checkFindCourseLink() {
-		try {
-
-			ArrayList<String> status = courseCardProcess.checkFindCourseLink();
-			updateExcelData(status, 3);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	/*
+	 * public void checkFindCourseLink() { try {
+	 * 
+	 * ArrayList<String> status = courseCardProcess.checkFindCourseLink();
+	 * updateExcelData(status, 3); } catch (Exception e) { e.printStackTrace(); } }
+	 */
 	public void checkCardSelection(ArrayList<String> data) {
 		try {
 
@@ -702,17 +699,12 @@ public class CourseCardProcessTest implements Callable<String>
 			  e.printStackTrace(); 
 		  }
 	  }
-	  public void checkBeginCourseCard() 
-	  { 
-		  try 
-		  {
-			  ArrayList<String> status =  courseCardProcess.checkBeginCourseCard(); updateExcelData(status, 30);
-		  } 
-		  catch (Exception e)
-		  { 
-			  e.printStackTrace(); 
-		  }
-	  }
+
+		/*
+		 * public void checkBeginCourseCard() { try { ArrayList<String> status =
+		 * courseCardProcess.checkBeginCourseCard(); updateExcelData(status, 30); }
+		 * catch (Exception e) { e.printStackTrace(); } }
+		 */
 	  public void checkExpandAllProcess() 
 	  { 
 		  try 

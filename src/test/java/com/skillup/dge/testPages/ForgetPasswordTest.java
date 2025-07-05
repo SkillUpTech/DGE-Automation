@@ -65,6 +65,16 @@ public class ForgetPasswordTest implements Callable<String>
 			 	case "TC_N_08":
 			 		TC_N_08(row);
 			        break;
+			 	case "checkPasswordResetMail":
+			 		checkPasswordResetMail(row.get(1));
+			 		break;
+				case "checkResetMailActionLink":
+					checkResetMailActionLink();
+					break;
+				case "checkRestPaswwordProcess":
+					checkRestPaswwordProcess();
+					break;
+			 		
 				}
 			}
 		 
@@ -210,6 +220,36 @@ public class ForgetPasswordTest implements Callable<String>
 		try {
 
 			ArrayList<String> status = forgetPasswordPage.checkTC_N_08(data);
+			updateExcelData(status, 11);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkPasswordResetMail(String mail)
+	{
+		try {
+
+			ArrayList<String> status = forgetPasswordPage.checkPasswordResetMail(mail);
+			updateExcelData(status, 11);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkResetMailActionLink()
+	{
+		try {
+
+			ArrayList<String> status = forgetPasswordPage.checkResetMailActionLink();
+			updateExcelData(status, 11);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void checkRestPaswwordProcess()
+	{
+		try {
+
+			ArrayList<String> status = forgetPasswordPage.checkRestPaswwordProcess();
 			updateExcelData(status, 11);
 		} catch (Exception e) {
 			e.printStackTrace();

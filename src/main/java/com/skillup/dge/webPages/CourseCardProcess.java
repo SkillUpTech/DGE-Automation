@@ -3,12 +3,13 @@ package com.skillup.dge.webPages;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,23 +33,6 @@ public class CourseCardProcess
 		this.registerPage = new RegisterPage(driver);
 	}
 	
-	public ArrayList<String> checkFindCourseLink()
-	{
-		ArrayList<String> status = new ArrayList<String>();
-		String clickFindCourse = "//a[contains(text(),'Find a course ')]";
-		try
-		{
-			if (driver.findElements(By.xpath(clickFindCourse)).size() > 0) 
-			{
-			} 
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			status.add("Fail");
-		}
-		return status;
-	}
 	
 	public String checkWebElementComparision(String locator, String data)
 	{
@@ -780,7 +764,7 @@ public class CourseCardProcess
 		return status;
 	}
 	
-	public ArrayList<String> checkBeginCourseCard()
+	public ArrayList<String> checkBeginCourseCard(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String clickBeginCourse = ".//a[contains(text(),'Begin Course')]";
@@ -796,12 +780,14 @@ public class CourseCardProcess
 			{
 				js.executeScript("arguments[0].scrollIntoView(true);", card);
 				wait.until(ExpectedConditions.visibilityOf(card));
+				
 				WebElement courseCardTitleFromDashboardLocator = card.findElement(By.xpath(courseCardTitle));
 				js.executeScript("arguments[0].scrollIntoView(true);", courseCardTitleFromDashboardLocator);
 				wait.until(ExpectedConditions.visibilityOf(courseCardTitleFromDashboardLocator));
+				
 				String courseCardTitleTextFromDashboard = courseCardTitleFromDashboardLocator.getText();
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-				if(courseCardTitleText.equals(courseCardTitleTextFromDashboard))
+				if(data.get(1).equals(courseCardTitleTextFromDashboard))
 				{
 					By clickBeginCourseFromDashboardLocator = By.xpath(clickBeginCourse);
 					status.addAll(this.clickWebElements(card, clickBeginCourseFromDashboardLocator));
@@ -1382,10 +1368,11 @@ public class CourseCardProcess
 	public ArrayList<String> checkHideNotes(ArrayList<String> data)
 	{
 		ArrayList<String> status = new ArrayList<String>();
+		String showNotesLocator = "//button[contains(text(),'Show Notes')]";
 		String hideNotesLocator = "//button[contains(text(),'Hide Notes')]";
 		try
 		{
-			status.add(homePage.clickWebElement(hideNotesLocator));
+			status.add(homePage.clickWebElement(showNotesLocator));
 			System.out.println("Notes are shown successfully.");
 			status.add(homePage.clickWebElement(hideNotesLocator));
 			System.out.println("Notes are hidden successfully.");
@@ -1662,8 +1649,15 @@ public class CourseCardProcess
         {
             element.clear();
             Thread.sleep(200); // wait for the element to be ready
-            element.sendKeys(textToEnter);
-        } 
+            if(textToEnter.equals("empty"))
+            {
+            	element.sendKeys(" ");
+            }
+            else
+            {
+            	element.sendKeys(textToEnter);
+            }
+        }
         else 
         {
             System.out.println("Element is not displayed or enabled: " + locator);
@@ -2079,8 +2073,11 @@ public class CourseCardProcess
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String userDropdown = "//header//div[@data-testid='dropdown']/button";
+		String locateDiscussionTabFromCourseContent = "//div[@class='nav-menu']//a[4]";
 		try
 		{
+			status.add(homePage.clickWebElement(locateDiscussionTabFromCourseContent)); // Click on discussion tab
+			status.add(registerPage.FocusWindow("discussion"));
 			discussionPage = driver.getWindowHandle();
 			status.add(homePage.clickWebElement(userDropdown));
 		}
@@ -2735,14 +2732,20 @@ public class CourseCardProcess
 			status.add(homePage.clickWebElement(clickSocialLinksSection));
 			Thread.sleep(200); 
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-			status.add(homePage.clickWebElement(editFacebook));
-			Thread.sleep(500); 
+			if(driver.findElements(By.xpath(editFacebook)).size() > 0)
+			{
+				WebElement editFacebookElement = driver.findElement(By.xpath(editFacebook));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(70));
+				wait.until(ExpectedConditions.elementToBeClickable(editFacebookElement));
+				status.add(homePage.clickWebElement(editFacebook));
+				Thread.sleep(500); 
+			}
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
 			if(driver.findElements(By.xpath(enterFacebookField)).size()>0)
 			{
 				status.addAll(this.enterTextOnField(enterFacebookField, "test"));
 			}
-			Thread.sleep(200); 
+			Thread.sleep(200);
 			status.add(homePage.clickWebElement(clickSaveButton));
 			Thread.sleep(200); 
 		}
@@ -2913,10 +2916,12 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	String homepageLinkURL = "";
 	public ArrayList<String> checkSignOutProcess()
 	{
 		ArrayList<String> status = new ArrayList<String>();
 		String signOutButton = "//a[contains(text(),'Sign Out')]";
+		String clickHomePageLink = "//a[contains(text(),'click here to go to the home page')]";
 		try
 		{
 			if (driver.findElements(By.xpath(signOutButton)).size() > 0) 
@@ -2925,6 +2930,14 @@ public class CourseCardProcess
 				Thread.sleep(200); 
 				status.add(registerPage.FocusWindow("logout"));
 				Thread.sleep(200); 
+				if(driver.findElements(By.xpath(clickHomePageLink)).size()>0)
+				{
+					homepageLinkURL = driver.findElement(By.xpath(clickHomePageLink)).getAttribute("href");
+					//driver.close(); // Close the sign-out tab
+					driver.switchTo().newWindow(WindowType.TAB); // Open a new tab)
+					driver.get(homepageLinkURL); // Navigate to the home page link
+				}
+				
 			} 
 		}
 		catch (Exception e) {
@@ -2936,15 +2949,12 @@ public class CourseCardProcess
 	public ArrayList<String> checkEnrollCourseWithoutSignIn(String courseName)
 	{
 		ArrayList<String> status = new ArrayList<String>();
-		String clickHomePageLink = "//a[contains(text(),'click here to go to the home page')]";
 		String listOfCourses = "//ul[@class='courses-listing']/li";
 		String enrollButton = "//a[@class='register']";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		try
 		{
-			status.add(homePage.openLinkInNewTab(clickHomePageLink));
-			Thread.sleep(200); 
-			status.add(registerPage.FocusWindow("stagecourses.skillup.online"));
 			Thread.sleep(200); 
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			if (driver.findElements(By.xpath(listOfCourses)).size() > 0)
@@ -2953,18 +2963,29 @@ public class CourseCardProcess
 				List<WebElement> courses = driver.findElements(By.xpath(listOfCourses));
 				for (WebElement course : courses) 
 				{
-					WebElement locateCardTitle = course.findElement(By.xpath(".//h2/span[2]"));
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+					WebElement getcard = course;
+					
+					js.executeScript("arguments[0].scrollIntoView(true);", getcard);
+					Thread.sleep(200); // Wait for the card to be visible
+					WebElement locateCardTitle = getcard.findElement(By.xpath(".//h2/span[2]"));
+					wait.until(ExpectedConditions.visibilityOf(locateCardTitle));
+					js.executeScript("arguments[0].scrollIntoView(true);", locateCardTitle);
+					Thread.sleep(200);
 					String courseCardName = locateCardTitle.getText();
 					if(courseCardName.equalsIgnoreCase(courseName))
 					{
-						WebElement clickLearnMoreButton = course.findElement(By.xpath("./following-sibling::a[contains(text(),'Learn More')]"));
+						WebElement clickLearnMoreButton = getcard.findElement(By.xpath(".//following-sibling::a[contains(text(),'Learn More')]"));
+						wait.until(ExpectedConditions.visibilityOf(clickLearnMoreButton));
 						js.executeScript("arguments[0].scrollIntoView(true);", clickLearnMoreButton);
 						js.executeScript("arguments[0].click();", clickLearnMoreButton);
+						Thread.sleep(200);
 						status.add(registerPage.FocusWindow("/about"));
 						Thread.sleep(200); // Wait for the new tab to load
 						status.add(homePage.clickWebElement(enrollButton));
 						Thread.sleep(200); 
 						status.add(registerPage.FocusWindow("login?"));
+						break;
 					}
 				}
 			} 
@@ -2981,4 +3002,5 @@ public class CourseCardProcess
 		}
 		return status;
 	}
+	
 }

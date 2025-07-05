@@ -65,8 +65,8 @@ public class SignInPage
 		String signInButtonLocator = "//form[@id='sign-in-form']//button[@id='sign-in']";
 		try 
 		{
-			String userName = data.get(4);
-			String password = data.get(5);
+			String userName = data.get(1);
+			String password = data.get(2);
 			baseWindow = driver.getWindowHandle();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			if(driver.findElements(By.xpath(signInLocator)).size()>0)
